@@ -722,10 +722,10 @@
   /* CITY PAGE ACTIVITY ROWS */
   .city-activity-row {
     display: grid;
-    grid-template-columns: 200px 1fr auto auto auto;
+    grid-template-columns: 180px 1fr auto auto auto;
     align-items: center;
-    gap: 16px;
-    padding: 14px 28px;
+    gap: 12px;
+    padding: 10px 28px;
     border-bottom: 1px solid var(--light);
     transition: background 0.15s;
   }
@@ -735,18 +735,24 @@
 
   .car-name {
     font-family: 'Shippori Mincho', serif;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 800;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .car-loc {
-    font-size: 11px;
+    font-size: 10px;
     color: var(--muted);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .car-who {
-    font-size: 10px;
+    font-size: 9px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     font-weight: 700;
@@ -755,16 +761,17 @@
 
   .car-tags {
     display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
+    gap: 4px;
+    flex-wrap: nowrap;
     justify-content: flex-end;
+    overflow: hidden;
   }
 
   .car-map {
     font-size: 9px;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    padding: 5px 10px;
+    padding: 4px 8px;
     border: 1px solid var(--light);
     color: var(--muted);
     text-decoration: none;
@@ -1227,6 +1234,19 @@
   }
 
   /* BUDGET TAB */
+  .budget-outer {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: clamp(20px, 4vw, 40px) clamp(16px, 4vw, 40px) 80px;
+  }
+
+  .budget-slider-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 2px;
+  }
+
   .budget-card {
     background: var(--white);
     border: 1px solid var(--light);
@@ -1259,6 +1279,7 @@
     width: 100%;
     accent-color: #4aba72;
     cursor: pointer;
+    min-height: 28px;
   }
 
   .budget-slider-labels {
@@ -1273,6 +1294,7 @@
     display: flex;
     align-items: baseline;
     gap: 12px;
+    flex-wrap: wrap;
     margin-top: 4px;
   }
 
@@ -1288,6 +1310,40 @@
     color: var(--muted) !important;
     font-family: inherit !important;
     font-weight: 400 !important;
+  }
+
+  .budget-persons {
+    background: var(--ink);
+    color: var(--white);
+    padding: clamp(20px, 4vw, 32px) clamp(16px, 4vw, 40px);
+    margin-bottom: 2px;
+  }
+
+  .budget-person-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+
+  .budget-cities {
+    background: var(--white);
+    padding: clamp(20px, 4vw, 32px) clamp(16px, 4vw, 40px);
+    border: 1px solid var(--light);
+  }
+
+  .budget-city-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .budget-notes-grid {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.8;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 32px;
   }
   .logi-section {
     padding: 56px 0;
@@ -1528,20 +1584,6 @@
     }
   }
 
-  @media (max-width: 900px) {
-    #total-banner { grid-template-columns: 1fr; }
-    #total-banner > div:last-child { text-align: left; }
-    #bar-chart > div { grid-template-columns: 100px 1fr 70px 50px !important; }
-  }
-  @media (max-width: 600px) {
-    #budget .budget-card { padding: 20px 16px; }
-    #total-banner { padding: 24px 20px; }
-    #total-usd { font-size: 36px !important; }
-    #city-breakdown, #person-totals { grid-template-columns: 1fr 1fr !important; }
-    #bar-chart > div { grid-template-columns: 80px 1fr 60px !important; }
-    #bar-chart > div > div:last-child { display: none; }
-  }
-
   /* PICKS TAB */
   .picks-section-header {
     display: flex;
@@ -1616,7 +1658,78 @@
   .activities-subnav-btn.asn-recommended:hover,
   .activities-subnav-btn.asn-recommended.active { color: var(--gold); border-bottom-color: var(--gold); }
 
+  .day-trips-outer {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 clamp(16px, 4vw, 40px) 60px;
+  }
+
+  .day-trips-info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: var(--light);
+    margin: 40px 0 2px;
+  }
+
+  @media (max-width: 900px) {
+    .day-trips-info-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .day-trips-info-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
   /* DAY TRIPS COLLAPSIBLE */
+
+  .day-trip-card {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .day-trip-outer {
+    background: var(--white);
+    padding: 36px;
+  }
+
+  .day-trip-tags {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .day-trip-meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--light);
+    padding-top: 14px;
+  }
+
+  @media (max-width: 600px) {
+    .day-trip-outer {
+      padding: 20px 16px;
+    }
+
+    .day-trip-card {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .day-trip-tags {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+
   .trip-card {
     background: var(--white);
     cursor: pointer;
@@ -1936,14 +2049,21 @@
     }
 
     /* TRIP OVERVIEW section — 900px */
-    /* 3-col feature row → 1 col stacked */
     .overview-feature-row {
       grid-template-columns: 1fr !important;
     }
 
-    /* 5-col booking timeline → 2+3 wrap */
     .overview-timeline-row {
       grid-template-columns: 1fr 1fr !important;
+    }
+
+    /* BUDGET — 900px: single column sliders, 2x2 persons */
+    .budget-slider-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .budget-person-grid {
+      grid-template-columns: 1fr 1fr;
     }
   }
 
@@ -2062,6 +2182,26 @@
     /* More compact day blocks */
     .day-num {
       min-width: 50px;
+    }
+
+    /* BUDGET — 600px: everything single column */
+    .budget-slider-grid,
+    .budget-person-grid,
+    .budget-city-grid,
+    .budget-notes-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .budget-card {
+      padding: 20px 16px;
+    }
+
+    #total-banner {
+      grid-template-columns: 1fr;
+    }
+
+    #total-banner > div:last-child {
+      text-align: left;
     }
 
     /* MAP — 600px: reduce height, full-width filters */
@@ -2944,7 +3084,7 @@
             <div class="activity-desc">Physical dungeon escape experience inside Tokyu Kabukicho Tower. Teams of 2–3 battle through quests, defeat monsters and clear traps using strength, teamwork and strategy. 40–60 min, fully in English. Renewed Spring 2025.</div>
             <div class="activity-tags">
               <span class="activity-tag at-type">Escape Room</span>
-              <span class="activity-tag at-cost">¥2,000–2,250/person</span>
+              <span class="activity-tag at-cost">¥2,000–2,250/pp</span>
               <span class="activity-tag at-book">Book Ahead</span>
             </div>
             <div class="activity-links">
@@ -2974,7 +3114,7 @@
               <span class="activity-tag at-type">Bar</span>
               <span class="activity-tag at-cost">¥500–1,500/drink</span>
               <span class="activity-tag at-book">Walk-in</span>
-              <span class="activity-tag at-tip">Evening Best</span>
+              <span class="activity-tag at-tip">PM Best</span>
             </div>
             <div class="activity-links">
               <a href="https://maps.google.com/?q=Golden+Gai+Shinjuku+Tokyo" target="_blank" class="activity-link">Maps ↗</a>
@@ -2988,9 +3128,9 @@
             <div class="activity-tags">
               <span class="activity-tag at-type">Cafe</span>
               <span class="activity-tag at-type">Restaurant</span>
-              <span class="activity-tag at-cost">¥3,000–4,000/person</span>
-              <span class="activity-tag at-book">Reserve 1 Month Ahead</span>
-              <span class="activity-tag at-tip">Group Split Option</span>
+              <span class="activity-tag at-cost">¥3,000–4,000/pp</span>
+              <span class="activity-tag at-book">Book Ahead</span>
+              <span class="activity-tag at-tip">Can Split</span>
               <span class="activity-tag at-tip">2 Locations</span>
             </div>
             <div class="activity-links">
@@ -3006,7 +3146,7 @@
             <div class="activity-tags">
               <span class="activity-tag at-type">Arcade</span>
               <span class="activity-tag at-type">Pinball</span>
-              <span class="activity-tag at-cost">Free Entry · ¥100/game</span>
+              <span class="activity-tag at-cost">¥100/game</span>
               <span class="activity-tag at-book">Walk-in</span>
             </div>
             <div class="activity-links">
@@ -3020,9 +3160,9 @@
             <div class="activity-desc">The legendary Studio Ghibli museum in Inokashira Park, Mitaka — about 20 min from Shinjuku. Immersive exhibits on Miyazaki's animation process, life-size Catbus, rooftop robot soldier, and exclusive short films screened in the Saturn Theater. Photography is not permitted inside. A must for any Ghibli fan.</div>
             <div class="activity-tags">
               <span class="activity-tag at-type">Museum</span>
-              <span class="activity-tag at-cost">¥1,000–2,000/person</span>
-              <span class="activity-tag at-book">Strict Booking — 10th of Month</span>
-              <span class="activity-tag at-tip">~20min from Shinjuku</span>
+              <span class="activity-tag at-cost">¥1,000–2,000/pp</span>
+              <span class="activity-tag at-book">Dec 10 Booking</span>
+              <span class="activity-tag at-tip">~20min away</span>
             </div>
             <div class="activity-links">
               <a href="https://maps.google.com/?q=Ghibli+Museum+Mitaka+Tokyo" target="_blank" class="activity-link">Maps ↗</a>
@@ -3037,7 +3177,7 @@
             <div class="activity-desc">Outdoor field RPG experience inside Nijigen no Mori theme park on Awaji Island, Hyogo Prefecture. Form a party of up to 4, choose your class, and explore a real-world recreation of the Dragon Quest universe with digital characters, puzzles, and quests. Fully available in English.</div>
             <div class="activity-tags">
               <span class="activity-tag at-type">Theme Park</span>
-              <span class="activity-tag at-cost">¥3,500–4,500/person</span>
+              <span class="activity-tag at-cost">¥3,500–4,500/pp</span>
               <span class="activity-tag at-book">Book Ahead</span>
               <span class="activity-tag at-tip">~1hr from Osaka</span>
             </div>
@@ -3054,7 +3194,7 @@
               <span class="activity-tag at-type">Escape Room</span>
               <span class="activity-tag at-type">Entertainment</span>
               <span class="activity-tag at-cost">¥2,700–4,500/game</span>
-              <span class="activity-tag at-book">Book Ahead Recommended</span>
+              <span class="activity-tag at-book">Book Ahead</span>
             </div>
             <div class="activity-links">
               <a href="https://maps.google.com/?q=Tokyo+Mystery+Circus+Shinjuku+Kabukicho" target="_blank" class="activity-link">Maps ↗</a>
@@ -3064,12 +3204,12 @@
           <div class="activity-card">
             <div class="activity-location">Tokyo · Multiple Locations</div>
             <div class="activity-name">Karaoke Kan</div>
-            <div class="activity-desc">Tokyo's most famous karaoke chain with 100+ locations across the city. The Shibuya location is iconic — rooms 601 and 602 were featured in Lost in Translation. Uniquely-designed rooms with dual monitors, luxury First Class rooms, and party rooms. English, Chinese, and Korean song selection.</div>
+            <div class="activity-desc">Tokyo's most famous karaoke chain with 100+ locations across the city. The Shibuya location is iconic — rooms 601 and 602 were featured in LiT Rooms. Uniquely-designed rooms with dual monitors, luxury First Class rooms, and party rooms. English, Chinese, and Korean song selection.</div>
             <div class="activity-tags">
               <span class="activity-tag at-type">Karaoke</span>
-              <span class="activity-tag at-cost">Varies by Location</span>
-              <span class="activity-tag at-book">Walk-in or Reserve</span>
-              <span class="activity-tag at-tip">Shibuya — Lost in Translation Rooms</span>
+              <span class="activity-tag at-cost">Varies</span>
+              <span class="activity-tag at-book">Walk-in</span>
+              <span class="activity-tag at-tip">LiT Rooms</span>
             </div>
             <div class="activity-links">
               <a href="https://maps.google.com/?q=Karaoke+Kan+Shibuya+Tokyo" target="_blank" class="activity-link">Maps (Shibuya) ↗</a>
@@ -3083,8 +3223,8 @@
             <div class="activity-tags">
               <span class="activity-tag at-type">Cafe</span>
               <span class="activity-tag at-type">Restaurant</span>
-              <span class="activity-tag at-cost">¥1,500–2,500/person</span>
-              <span class="activity-tag at-book">Strict Booking — 10th of Month 6pm JST</span>
+              <span class="activity-tag at-cost">¥1,500–2,500/pp</span>
+              <span class="activity-tag at-book">Dec 10 6pm JST</span>
             </div>
             <div class="activity-links">
               <a href="https://maps.google.com/?q=Kirby+Cafe+Tokyo+Skytree+Solamachi" target="_blank" class="activity-link">Maps ↗</a>
@@ -3097,10 +3237,10 @@
             <div class="activity-tags">
               <span class="activity-tag at-type">Market</span>
               <span class="activity-tag at-type">Museum</span>
-              <span class="activity-tag at-cost">Free to Explore</span>
-              <span class="activity-tag at-cost">~&yen;500&ndash;1,500 paid attractions</span>
+              <span class="activity-tag at-cost">Free Entry</span>
+              <span class="activity-tag at-cost">¥500–1,500</span>
               <span class="activity-tag at-book">Walk-in</span>
-              <span class="activity-tag at-tip">~30min from Shinjuku</span>
+              <span class="activity-tag at-tip">~30min away</span>
               <span class="activity-tag at-tip">Half to Full Day</span>
             </div>
             <div class="activity-links">
@@ -3115,10 +3255,10 @@
             <div class="activity-tags">
               <span class="activity-tag at-type">Nature</span>
               <span class="activity-tag at-cost">Free Public Baths</span>
-              <span class="activity-tag at-cost">&yen;600&ndash;800 paid baths</span>
+              <span class="activity-tag at-cost">¥600–800</span>
               <span class="activity-tag at-book">Walk-in</span>
               <span class="activity-tag at-tip">~3hrs from Tokyo</span>
-              <span class="activity-tag at-tip">Overnight Recommended</span>
+              <span class="activity-tag at-tip">Overnight</span>
               <span class="activity-tag at-tip">Snow in January</span>
             </div>
             <div class="activity-links">
@@ -3133,10 +3273,10 @@
             <div class="activity-tags">
               <span class="activity-tag at-type">Restaurant</span>
               <span class="activity-tag at-type">Market</span>
-              <span class="activity-tag at-cost">Free to Explore</span>
-              <span class="activity-tag at-cost">Kobe Beef &yen;5,000&ndash;15,000</span>
+              <span class="activity-tag at-cost">Free Entry</span>
+              <span class="activity-tag at-cost">Kobe Beef</span>
               <span class="activity-tag at-book">Walk-in</span>
-              <span class="activity-tag at-tip">~30min from Osaka</span>
+              <span class="activity-tag at-tip">~30min away</span>
               <span class="activity-tag at-tip">Half to Full Day</span>
             </div>
             <div class="activity-links">
@@ -3145,7 +3285,7 @@
           </div>
 
           <div class="activity-card">
-            <div class="activity-location">Yamanashi Prefecture &middot; ~2hrs from Shinjuku</div>
+            <div class="activity-location">Yamanashi Prefecture &middot; ~2hr away</div>
             <div class="activity-name">Mount Fuji (Kawaguchiko)</div>
             <div class="activity-desc">January is one of the best months for Fuji views &mdash; the mountain is fully snow-capped, the skies are at their clearest, and the crowds are at their annual low. The climbing trails are closed in winter (open only July&ndash;early September), but the Fuji Five Lakes area (Kawaguchiko is the most accessible) offers exceptional views. Key spots: Chureito Pagoda with Fuji behind it (the iconic postcard shot), Lake Kawaguchi shoreline, Kachi Kachi Mountain Ropeway (year-round) for aerial views, and the Fuji Visitor Center. Direct Fuji Express buses from Shinjuku Bus Terminal take about 1hr 45min and run frequently. One of the most vlog-worthy days of the entire trip.</div>
             <div class="activity-tags">
@@ -3154,9 +3294,9 @@
               <span class="activity-tag at-cost">Ropeway &yen;900</span>
               <span class="activity-tag at-cost">Pagoda &yen;400</span>
               <span class="activity-tag at-book">Walk-in</span>
-              <span class="activity-tag at-tip">~2hrs from Shinjuku</span>
+              <span class="activity-tag at-tip">~2hr away</span>
               <span class="activity-tag at-tip">Full Day</span>
-              <span class="activity-tag at-tip">Best Views in January</span>
+              <span class="activity-tag at-tip">Best Views</span>
             </div>
             <div class="activity-links">
               <a href="https://maps.google.com/?q=Lake+Kawaguchiko+Fuji+Five+Lakes+Japan" target="_blank" class="activity-link">Maps ↗</a>
@@ -3170,9 +3310,9 @@
             <div class="activity-tags">
               <span class="activity-tag at-type">Nature</span>
               <span class="activity-tag at-cost">Free Trail</span>
-              <span class="activity-tag at-cost">Transport ~&yen;5,000&ndash;7,000</span>
+              <span class="activity-tag at-cost">~¥5k transport</span>
               <span class="activity-tag at-book">Walk-in</span>
-              <span class="activity-tag at-tip">~3hrs from Tokyo or Kyoto</span>
+              <span class="activity-tag at-tip">~3hr day trip</span>
               <span class="activity-tag at-tip">Full Day</span>
               <span class="activity-tag at-tip">Snow in January</span>
             </div>
@@ -3190,9 +3330,9 @@
               <span class="activity-tag at-type">Museum</span>
               <span class="activity-tag at-cost">¥3,000–3,500</span>
               <span class="activity-tag at-book">Book Online</span>
-              <span class="activity-tag at-tip">~30min from Shinjuku</span>
+              <span class="activity-tag at-tip">~30min away</span>
               <span class="activity-tag at-tip">Half to Full Day</span>
-              <span class="activity-tag at-tip">Pairs with Yokohama Day Trip</span>
+              <span class="activity-tag at-tip">Pairs w/ Yokohama</span>
             </div>
             <div class="activity-links">
               <a href="https://maps.google.com/?q=Pokemon+Park+Kanto+Yokohama" target="_blank" class="activity-link">Maps ↗</a>
@@ -3206,10 +3346,10 @@
             <div class="activity-tags">
               <span class="activity-tag at-type">Observation Tower</span>
               <span class="activity-tag at-type">Shopping</span>
-              <span class="activity-tag at-cost">¥2,100 (Deck), ¥3,100 (both)</span>
+              <span class="activity-tag at-cost">¥2,100–3,100</span>
               <span class="activity-tag at-book">Walk-in</span>
               <span class="activity-tag at-tip">Half Day</span>
-              <span class="activity-tag at-tip">Vlog content potential</span>
+              <span class="activity-tag at-tip">Vlog Worthy</span>
             </div>
             <div class="activity-links">
               <a href="https://maps.google.com/?q=Tokyo+Skytree+Sumida+Ward" target="_blank" class="activity-link">Maps ↗</a>
@@ -3224,8 +3364,8 @@
               <span class="activity-tag at-type">Temple</span>
               <span class="activity-tag at-cost">Free</span>
               <span class="activity-tag at-book">Walk-in</span>
-              <span class="activity-tag at-tip">Iconic Tokyo location</span>
-              <span class="activity-tag at-tip">Pairs with Skytree</span>
+              <span class="activity-tag at-tip">Iconic</span>
+              <span class="activity-tag at-tip">Near Skytree</span>
               <span class="activity-tag at-tip">Always crowded</span>
             </div>
             <div class="activity-links">
@@ -3241,7 +3381,7 @@
               <span class="activity-tag at-type">Shopping</span>
               <span class="activity-tag at-cost">Free Entry</span>
               <span class="activity-tag at-book">Walk-in</span>
-              <span class="activity-tag at-tip">Must for vinyl collectors</span>
+              <span class="activity-tag at-tip">Vinyl</span>
               <span class="activity-tag at-tip">~1hr minimum</span>
               <span class="activity-tag at-tip">Shibuya cluster</span>
             </div>
@@ -3257,10 +3397,10 @@
             <div class="activity-tags">
               <span class="activity-tag at-type">Food Scene</span>
               <span class="activity-tag at-type">Shopping</span>
-              <span class="activity-tag at-cost">Free to Explore</span>
+              <span class="activity-tag at-cost">Free Entry</span>
               <span class="activity-tag at-cost">Food ¥500–2,000</span>
               <span class="activity-tag at-book">Walk-in</span>
-              <span class="activity-tag at-tip">Evening best for neon</span>
+              <span class="activity-tag at-tip">PM Best</span>
               <span class="activity-tag at-tip">Always crowded</span>
             </div>
             <div class="activity-links">
@@ -3294,9 +3434,9 @@
               <span class="activity-tag at-type">Photography</span>
               <span class="activity-tag at-cost">Free</span>
               <span class="activity-tag at-book">Walk-in</span>
-              <span class="activity-tag at-tip">398 steps to summit</span>
-              <span class="activity-tag at-tip">Incredible vlog content</span>
-              <span class="activity-tag at-tip">Part of Kawaguchiko day trip</span>
+              <span class="activity-tag at-tip">398 Steps</span>
+              <span class="activity-tag at-tip">Vlog Worthy</span>
+              <span class="activity-tag at-tip">Day Trip</span>
             </div>
             <div class="activity-links">
               <a href="https://maps.google.com/?q=Chureito+Pagoda+Lake+Kawaguchiko" target="_blank" class="activity-link">Maps ↗</a>
@@ -3324,7 +3464,7 @@
               <span class="activity-tag at-cost">¥1,000–2,000</span>
               <span class="activity-tag at-cost">Cash Only</span>
               <span class="activity-tag at-book">Walk-in</span>
-              <span class="activity-tag at-tip">~30min from Osaka</span>
+              <span class="activity-tag at-tip">~30min away</span>
             </div>
             <div class="activity-links">
               <a href="https://maps.google.com/?q=The+Munch+coffee+Yao+Osaka" target="_blank" class="activity-link">Maps ↗</a>
@@ -3339,8 +3479,8 @@
               <span class="activity-tag at-type">Restaurant</span>
               <span class="activity-tag at-type">Izakaya</span>
               <span class="activity-tag at-cost">¥2,400–3,200/set</span>
-              <span class="activity-tag at-book">Walk-in · Arrive Early</span>
-              <span class="activity-tag at-warn">Closed Thu / Sun / Mon</span>
+              <span class="activity-tag at-book">Go Early</span>
+              <span class="activity-tag at-warn">Closed Thu+</span>
             </div>
             <div class="activity-links">
               <a href="https://maps.google.com/?q=Izakaya+Toyo+Kyobashi+Osaka" target="_blank" class="activity-link">Maps ↗</a>
@@ -3353,10 +3493,10 @@
             <div class="activity-desc">Arguably the most authentic Mexican tacos in Japan, run by a Japanese chef who spent years in Mexico City. Corn tortillas, carnitas, suadero, and arrachera made with ingredients imported directly from Mexico. Tucked down a back street near Meiji Jingu Mae Station. Easy to combine with a Wiggle Wiggle / Harajuku day.</div>
             <div class="activity-tags">
               <span class="activity-tag at-type">Restaurant</span>
-              <span class="activity-tag at-cost">~¥2,000/person</span>
+              <span class="activity-tag at-cost">~¥2,000/pp</span>
               <span class="activity-tag at-book">Walk-in</span>
-              <span class="activity-tag at-warn">Sells Out by 1pm</span>
-              <span class="activity-tag at-tip">2 Locations (Harajuku + Ebisu)</span>
+              <span class="activity-tag at-warn">Sells Out Early</span>
+              <span class="activity-tag at-tip">2 Locations</span>
             </div>
             <div class="activity-links">
               <a href="https://maps.google.com/?q=Tacos+3Hermanos+Harajuku+Tokyo" target="_blank" class="activity-link">Maps (Harajuku) ↗</a>
@@ -3372,7 +3512,7 @@
               <span class="activity-tag at-type">Market</span>
               <span class="activity-tag at-cost">Free Entry</span>
               <span class="activity-tag at-book">Walk-in</span>
-              <span class="activity-tag at-tip">Morning Best</span>
+              <span class="activity-tag at-tip">AM Best</span>
             </div>
             <div class="activity-links">
               <a href="https://maps.google.com/?q=Tsukiji+Outer+Market+Tokyo" target="_blank" class="activity-link">Maps ↗</a>
@@ -3414,9 +3554,9 @@
             <div class="activity-desc">Famous beef katsu chain with locations across Tokyo. Lightly-fried breaded beef cutlet served rare, with a personal grill at each table to cook to your preferred doneness. Set meals include rice, miso soup, cabbage, and pickles. Expect 30-45 min waits during peak hours.</div>
             <div class="activity-tags">
               <span class="activity-tag at-type">Restaurant</span>
-              <span class="activity-tag at-cost">¥1,930–3,060/person</span>
+              <span class="activity-tag at-cost">¥1,930–3,060/pp</span>
               <span class="activity-tag at-book">Walk-in</span>
-              <span class="activity-tag at-tip">Expect Lines</span>
+              <span class="activity-tag at-tip">Busy</span>
             </div>
             <div class="activity-links">
               <a href="https://maps.google.com/?q=Gyukatsu+Motomura+Shibuya+Tokyo" target="_blank" class="activity-link">Maps (Shibuya) ↗</a>
@@ -3431,7 +3571,7 @@
               <span class="activity-tag at-type">Shrine</span>
               <span class="activity-tag at-cost">Free</span>
               <span class="activity-tag at-book">Walk-in</span>
-              <span class="activity-tag at-tip">Sunrise Recommended</span>
+              <span class="activity-tag at-tip">Sunrise</span>
             </div>
             <div class="activity-links">
               <a href="https://maps.google.com/?q=Fushimi+Inari+Shrine+Kyoto" target="_blank" class="activity-link">Maps ↗</a>
@@ -3446,7 +3586,7 @@
               <span class="activity-tag at-type">Temple</span>
               <span class="activity-tag at-cost">¥400</span>
               <span class="activity-tag at-book">Walk-in</span>
-              <span class="activity-tag at-tip">Arrive Early</span>
+              <span class="activity-tag at-tip">Go Early</span>
             </div>
             <div class="activity-links">
               <a href="https://maps.google.com/?q=Kinkaku-ji+Golden+Pavilion+Kyoto" target="_blank" class="activity-link">Maps ↗</a>
@@ -3461,7 +3601,7 @@
               <span class="activity-tag at-type">Nature</span>
               <span class="activity-tag at-cost">Free</span>
               <span class="activity-tag at-book">Walk-in</span>
-              <span class="activity-tag at-tip">Morning Best</span>
+              <span class="activity-tag at-tip">AM Best</span>
             </div>
             <div class="activity-links">
               <a href="https://maps.google.com/?q=Arashiyama+Bamboo+Forest+Kyoto" target="_blank" class="activity-link">Maps ↗</a>
@@ -3475,7 +3615,7 @@
             <div class="activity-tags">
               <span class="activity-tag at-type">Nature</span>
               <span class="activity-tag at-type">Shopping</span>
-              <span class="activity-tag at-cost">Free to Wander</span>
+              <span class="activity-tag at-cost">Free Entry</span>
               <span class="activity-tag at-book">Walk-in</span>
               <span class="activity-tag at-tip">Full Day Activity</span>
             </div>
@@ -3493,7 +3633,7 @@
               <span class="activity-tag at-type">Restaurant</span>
               <span class="activity-tag at-cost">Varies</span>
               <span class="activity-tag at-book">Walk-in</span>
-              <span class="activity-tag at-tip">Evening Best</span>
+              <span class="activity-tag at-tip">PM Best</span>
             </div>
             <div class="activity-links">
               <a href="https://maps.google.com/?q=Pontocho+Alley+Kyoto" target="_blank" class="activity-link">Maps ↗</a>
@@ -3506,7 +3646,7 @@
             <div class="activity-desc">Iconic 5-story pagoda visible throughout Higashiyama district. Great photo spot from the surrounding streets. The pagoda itself is not usually open to the public but the exterior and surrounding area are worth visiting. Combine with Higashiyama walking tour.</div>
             <div class="activity-tags">
               <span class="activity-tag at-type">Temple</span>
-              <span class="activity-tag at-cost">Free (exterior)</span>
+              <span class="activity-tag at-cost">Free Entry</span>
               <span class="activity-tag at-book">Walk-in</span>
               <span class="activity-tag at-tip">Photo Spot</span>
             </div>
@@ -3536,7 +3676,7 @@
             <div class="activity-tags">
               <span class="activity-tag at-type">Bar</span>
               <span class="activity-tag at-type">Museum</span>
-              <span class="activity-tag at-cost">¥500–1,000 tastings</span>
+              <span class="activity-tag at-cost">¥500–1k</span>
               <span class="activity-tag at-book">Walk-in</span>
             </div>
             <div class="activity-links">
@@ -3552,7 +3692,7 @@
               <span class="activity-tag at-type">Market</span>
               <span class="activity-tag at-cost">Free Entry</span>
               <span class="activity-tag at-book">Walk-in</span>
-              <span class="activity-tag at-tip">Grazing Recommended</span>
+              <span class="activity-tag at-tip">Grazing</span>
             </div>
             <div class="activity-links">
               <a href="https://maps.google.com/?q=Nishiki+Market+Kyoto" target="_blank" class="activity-link">Maps ↗</a>
@@ -3596,7 +3736,7 @@
               <span class="activity-tag at-type">Temple</span>
               <span class="activity-tag at-cost">¥300</span>
               <span class="activity-tag at-book">Walk-in</span>
-              <span class="activity-tag at-tip">Hidden Gem · Low Crowds</span>
+              <span class="activity-tag at-tip">Hidden Gem</span>
             </div>
             <div class="activity-links">
               <a href="https://maps.google.com/?q=Otagi+Nenbutsu+ji+Temple+Kyoto" target="_blank" class="activity-link">Maps ↗</a>
@@ -3621,9 +3761,9 @@
             <div class="activity-desc">The world's only official satellite of the Charles M. Schulz Museum in California. Features original comic strips, vintage Peanuts memorabilia, a giant Snoopy room, and the exclusive BROWN'S STORE shop. Adjacent PEANUTS Cafe on site. Located in Minami-machida Grandberry Park — about 35 min by express train from Shibuya, making it a half-day trip out of central Tokyo.</div>
             <div class="activity-tags">
               <span class="activity-tag at-type">Museum</span>
-              <span class="activity-tag at-cost">¥1,800/person</span>
+              <span class="activity-tag at-cost">¥1,800/pp</span>
               <span class="activity-tag at-book">Book Ahead</span>
-              <span class="activity-tag at-tip">~35min from Shibuya</span>
+              <span class="activity-tag at-tip">~35min away</span>
             </div>
             <div class="activity-links">
               <a href="https://maps.google.com/?q=Snoopy+Museum+Tokyo+Minami-machida+Grandberry+Park" target="_blank" class="activity-link">Maps ↗</a>
@@ -3673,7 +3813,7 @@
           <div class="activity-location">Tokyo &middot; Azabudai Hills</div>
           <div class="activity-name">TeamLab Borderless</div>
           <div class="activity-desc">Immersive digital art museum where boundaries between artworks dissolve. Visitors wander through rooms of flowing light, sound, and interaction with no fixed path. The Azabudai Hills location reopened in 2024. Sells out weeks in advance. Excellent vlog content for Patrick and Jake.</div>
-          <div class="activity-tags"><span class="activity-tag at-type">Museum</span><span class="activity-tag at-cost">¥3,200/person</span><span class="activity-tag at-book">Book Ahead</span></div>
+          <div class="activity-tags"><span class="activity-tag at-type">Museum</span><span class="activity-tag at-cost">¥3,200/pp</span><span class="activity-tag at-book">Book Ahead</span></div>
           <div class="activity-links"><a href="https://maps.google.com/?q=teamLab+Borderless+Azabudai+Hills+Tokyo" target="_blank" class="activity-link">Maps ↗</a></div>
         </div>
         <div class="activity-card">
@@ -3694,7 +3834,7 @@
           <div class="activity-location">Osaka &middot; Tempozan</div>
           <div class="activity-name">Osaka Aquarium Kaiyukan</div>
           <div class="activity-desc">One of the largest aquariums in the world. The centrepiece is a four-storey Pacific Ocean tank with whale sharks, manta rays, and thousands of fish. A spiral walkway descends through 14 aquatic environments. Good half-day for a slower Osaka afternoon.</div>
-          <div class="activity-tags"><span class="activity-tag at-type">Museum</span><span class="activity-tag at-cost">¥2,400/person</span><span class="activity-tag at-book">Walk-in</span><span class="activity-tag at-tip">Half Day</span></div>
+          <div class="activity-tags"><span class="activity-tag at-type">Museum</span><span class="activity-tag at-cost">¥2,400/pp</span><span class="activity-tag at-book">Walk-in</span><span class="activity-tag at-tip">Half Day</span></div>
           <div class="activity-links"><a href="https://maps.google.com/?q=Osaka+Aquarium+Kaiyukan" target="_blank" class="activity-link">Maps ↗</a></div>
         </div>
         <div class="activity-card">
@@ -3736,14 +3876,14 @@
           <div class="activity-location">Osaka &middot; Kuromon Ichiba Market</div>
           <div class="activity-name">Kuromon Market Food Tour</div>
           <div class="activity-desc">Osaka's premier market for eating — 190+ stalls selling fresh seafood, wagyu, takoyaki, okonomiyaki, and seasonal specialties. Unlike touristy Tsukiji, this is where Osaka locals actually eat breakfast and lunch. Grab skewers, sashimi, grilled scallops, and uni directly from vendors. Budget ¥2,000–3,000/person for a proper market crawl. Morning (9am–11am) is best for energy and selection. Incredible food vlog content.</div>
-          <div class="activity-tags"><span class="activity-tag at-type">Food Scene</span><span class="activity-tag at-type">Market</span><span class="activity-tag at-cost">¥2,000–3,000/person</span><span class="activity-tag at-book">Walk-in</span><span class="activity-tag at-tip">Morning best</span></div>
+          <div class="activity-tags"><span class="activity-tag at-type">Food Scene</span><span class="activity-tag at-type">Market</span><span class="activity-tag at-cost">¥2,000–3,000/pp</span><span class="activity-tag at-book">Walk-in</span><span class="activity-tag at-tip">Morning best</span></div>
           <div class="activity-links"><a href="https://maps.google.com/?q=Kuromon+Ichiba+Market+Osaka" target="_blank" class="activity-link">Maps ↗</a></div>
         </div>
         <div class="activity-card">
           <div class="activity-location">Tokyo &middot; Tsukiji</div>
           <div class="activity-name">Tsukiji Outer Market</div>
           <div class="activity-desc">Go before 9am for the best stalls and smallest crowds. Graze as you walk: fresh oysters, uni, tuna on rice, tamagoyaki. Budget ¥1,500–2,500 just for breakfast here. Jake's pick for authentic Tokyo food experience with vlog potential.</div>
-          <div class="activity-tags"><span class="activity-tag at-type">Food Scene</span><span class="activity-tag at-type">Market</span><span class="activity-tag at-cost">¥1,500–2,500/person</span><span class="activity-tag at-book">Walk-in</span><span class="activity-tag at-tip">Early morning best</span></div>
+          <div class="activity-tags"><span class="activity-tag at-type">Food Scene</span><span class="activity-tag at-type">Market</span><span class="activity-tag at-cost">¥1,500–2,500/pp</span><span class="activity-tag at-book">Walk-in</span><span class="activity-tag at-tip">AM Best</span></div>
           <div class="activity-links"><a href="https://maps.google.com/?q=Tsukiji+Outer+Market+Tokyo" target="_blank" class="activity-link">Maps ↗</a></div>
         </div>
         <div class="activity-card">
@@ -3757,7 +3897,7 @@
           <div class="activity-location">Tokyo &middot; Azabudai Hills</div>
           <div class="activity-name">TeamLab Borderless</div>
           <div class="activity-desc">Immersive digital art museum where boundaries between artworks dissolve. Visitors wander through rooms of flowing light, sound, and interaction with no fixed path. The Azabudai Hills location reopened in 2024. Sells out weeks in advance. Excellent vlog content for both.</div>
-          <div class="activity-tags"><span class="activity-tag at-type">Museum</span><span class="activity-tag at-cost">¥3,200/person</span><span class="activity-tag at-book">Book Ahead</span></div>
+          <div class="activity-tags"><span class="activity-tag at-type">Museum</span><span class="activity-tag at-cost">¥3,200/pp</span><span class="activity-tag at-book">Book Ahead</span></div>
           <div class="activity-links"><a href="https://maps.google.com/?q=teamLab+Borderless+Azabudai+Hills+Tokyo" target="_blank" class="activity-link">Maps ↗</a></div>
         </div>
         <div class="activity-card">
@@ -3792,7 +3932,7 @@
           <div class="activity-location">Tokyo &middot; Roppongi</div>
           <div class="activity-name">Roppongi Nightlife Cluster</div>
           <div class="activity-desc">Roppongi is Tokyo's most international nightlife district — bars, clubs, and late-night spots catering to expats and travelers. Midsection has dive bars, upscale cocktail lounges, and clubs spinning everything from EDM to J-pop. Many venues open until 5am. The vibe is cosmopolitan rather than traditional Tokyo. Good for Steve's nightlife focus and easy group splits (some bar-hopping, others in quieter spots). Taxis home are reliable at any hour.</div>
-          <div class="activity-tags"><span class="activity-tag at-type">Nightlife</span><span class="activity-tag at-cost">¥1,000–5,000/drink</span><span class="activity-tag at-book">Walk-in</span><span class="activity-tag at-tip">Late night</span><span class="activity-tag at-tip">English-friendly</span></div>
+          <div class="activity-tags"><span class="activity-tag at-type">Nightlife</span><span class="activity-tag at-cost">¥1k–5k/drink</span><span class="activity-tag at-book">Walk-in</span><span class="activity-tag at-tip">Late night</span><span class="activity-tag at-tip">English-friendly</span></div>
           <div class="activity-links"><a href="https://maps.google.com/?q=Roppongi+Tokyo+Nightlife" target="_blank" class="activity-link">Maps ↗</a></div>
         </div>
         <div class="activity-card">
@@ -3806,7 +3946,7 @@
           <div class="activity-location">Osaka &middot; Shinsekai</div>
           <div class="activity-name">Shinsekai Izakaya Crawl</div>
           <div class="activity-desc">Shinsekai is Osaka's rowdiest neighborhood — packed with tiny standing-room izakayas, kushikatsu (fried skewer) shops, and a energy that rivals Dotonbori but feels more local and less polished. The red-lanterned alleys are dominated by older establishments with passionate owners. Order kushikatsu and cheap beer (¥2,000–4,000/person for a full crawl). The crowd is mixed — salarymen, students, and travelers all packed together. Maximum authentic chaos and fun.</div>
-          <div class="activity-tags"><span class="activity-tag at-type">Food Scene</span><span class="activity-tag at-type">Nightlife</span><span class="activity-tag at-cost">¥2,000–4,000/person</span><span class="activity-tag at-book">Walk-in</span><span class="activity-tag at-tip">Evening</span><span class="activity-tag at-tip">Standing room</span></div>
+          <div class="activity-tags"><span class="activity-tag at-type">Food Scene</span><span class="activity-tag at-type">Nightlife</span><span class="activity-tag at-cost">¥2,000–4,000/pp</span><span class="activity-tag at-book">Walk-in</span><span class="activity-tag at-tip">Evening</span><span class="activity-tag at-tip">Standing room</span></div>
           <div class="activity-links"><a href="https://maps.google.com/?q=Shinsekai+Izakaya+Osaka" target="_blank" class="activity-link">Maps ↗</a></div>
         </div>
       </div>
@@ -3827,14 +3967,14 @@
           <div class="activity-location">Tokyo &middot; Koenji</div>
           <div class="activity-name">Koenji</div>
           <div class="activity-desc">Tokyo's alternative neighbourhood — live music venues, vintage record shops, secondhand fashion, and indie bars. Less polished than Shimokitazawa, more underground. Good vinyl hunting to complement Disk Union. 15 minutes from Shinjuku on the Chuo Line.</div>
-          <div class="activity-tags"><span class="activity-tag at-type">Shopping</span><span class="activity-tag at-type">Bar</span><span class="activity-tag at-cost">Free to Explore</span><span class="activity-tag at-book">Walk-in</span><span class="activity-tag at-tip">~15min from Shinjuku</span></div>
+          <div class="activity-tags"><span class="activity-tag at-type">Shopping</span><span class="activity-tag at-type">Bar</span><span class="activity-tag at-cost">Free Entry</span><span class="activity-tag at-book">Walk-in</span><span class="activity-tag at-tip">~15min away</span></div>
           <div class="activity-links"><a href="https://maps.google.com/?q=Koenji+Tokyo" target="_blank" class="activity-link">Maps ↗</a></div>
         </div>
         <div class="activity-card">
           <div class="activity-location">Tokyo &middot; Akihabara</div>
           <div class="activity-name">Akihabara Maid Cafes</div>
           <div class="activity-desc">Uniquely Tokyo experience — themed cafes staffed by maids who treat every customer as a guest in their home. @home Cafe and Maidreamin are the most established chains with English menus. Budget ¥1,500–2,500 for a drink and a performance. Good content for the vlog regardless.</div>
-          <div class="activity-tags"><span class="activity-tag at-type">Cafe</span><span class="activity-tag at-cost">¥1,500–2,500</span><span class="activity-tag at-book">Walk-in</span><span class="activity-tag at-tip">Classic Tokyo Experience</span></div>
+          <div class="activity-tags"><span class="activity-tag at-type">Cafe</span><span class="activity-tag at-cost">¥1,500–2,500</span><span class="activity-tag at-book">Walk-in</span><span class="activity-tag at-tip">Classic</span></div>
           <div class="activity-links"><a href="https://maps.google.com/?q=Maidreamin+Akihabara+Tokyo" target="_blank" class="activity-link">Maps ↗</a></div>
         </div>
         <div class="activity-card">
@@ -3848,7 +3988,7 @@
           <div class="activity-location">Tokyo &middot; Shimokitazawa</div>
           <div class="activity-name">Shimokitazawa Vinyl & Live Music</div>
           <div class="activity-desc">Shimokitazawa is Tokyo's bohemian neighborhood — packed with vintage record shops, tiny live music venues, indie theaters, and thrift stores crammed into narrow streets. Unlike the corporate Shibuya/Shinjuku vibe, this feels like genuine Tokyo alternative culture. Record shops have deep jazz, city-pop, and international collections. Evening venues host live acoustic, blues, and indie bands (¥2,000–3,000 cover). A day here includes vinyl hunting, lunch at a quirky cafe, and live music at night.</div>
-          <div class="activity-tags"><span class="activity-tag at-type">Shopping</span><span class="activity-tag at-type">Music Venue</span><span class="activity-tag at-cost">¥500–3,000</span><span class="activity-tag at-book">Walk-in</span><span class="activity-tag at-tip">Full day potential</span></div>
+          <div class="activity-tags"><span class="activity-tag at-type">Shopping</span><span class="activity-tag at-type">Music Venue</span><span class="activity-tag at-cost">¥500–3,000</span><span class="activity-tag at-book">Walk-in</span><span class="activity-tag at-tip">Full Day</span></div>
           <div class="activity-links"><a href="https://maps.google.com/?q=Shimokitazawa+Tokyo+Vinyl" target="_blank" class="activity-link">Maps ↗</a></div>
         </div>
         <div class="activity-card">
@@ -3876,7 +4016,7 @@
           <div class="activity-location">Kyoto &middot; Higashiyama District</div>
           <div class="activity-name">Higashiyama Quiet Walk & Dining</div>
           <div class="activity-desc">Higashiyama is often called Kyoto's "real" geisha district — less touristy than Gion but equally atmospheric. Narrow stone-paved lanes, wooden lattice windows, and lanterns create an immersive historic setting. The neighborhood has excellent small restaurants tucked into machiya buildings — tofu kaiseki, soba, and seasonal set meals (¥2,000–5,000). Visit Maruyama Park for a quiet moment with tea. The pace is slower and less crowded than main tourist areas, ideal for Conner's preference for intimate experiences.</div>
-          <div class="activity-tags"><span class="activity-tag at-type">Walking</span><span class="activity-tag at-type">Restaurant</span><span class="activity-tag at-cost">¥2,000–5,000 meals</span><span class="activity-tag at-book">Walk-in</span><span class="activity-tag at-tip">Half day</span><span class="activity-tag at-tip">Less crowded</span></div>
+          <div class="activity-tags"><span class="activity-tag at-type">Walking</span><span class="activity-tag at-type">Restaurant</span><span class="activity-tag at-cost">¥2k–5k meals</span><span class="activity-tag at-book">Walk-in</span><span class="activity-tag at-tip">Half day</span><span class="activity-tag at-tip">Less crowded</span></div>
           <div class="activity-links"><a href="https://maps.google.com/?q=Higashiyama+Kyoto" target="_blank" class="activity-link">Maps ↗</a></div>
         </div>
         <div class="activity-card">
@@ -4009,11 +4149,15 @@
 
     <!-- Tokyo activities table -->
     <div style="background:var(--light);padding:2px;">
-      <div style="background:var(--ink);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;">
+      <div onclick="toggleCityActivities(this)" style="background:var(--ink);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;">
         <span style="font-family:'Shippori Mincho',serif;font-size:16px;font-weight:800;color:var(--white);">Listed Activities</span>
-        <span style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);">15 total</span>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <span style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);">15 total</span>
+          <span class="city-act-arrow" style="color:var(--gold);font-size:13px;transition:transform 0.3s ease;">&#9660;</span>
+        </div>
       </div>
-      <div style="background:var(--white);">
+      <div class="city-act-panel" style="max-height:0;overflow:hidden;transition:max-height 0.45s ease,opacity 0.3s ease;opacity:0;">
+        <div style="background:var(--white);">
 
         <div class="city-activity-row">
           <div class="car-name">The Tokyo Matrix</div>
@@ -4035,7 +4179,7 @@
           <div class="car-name">Golden Gai</div>
           <div class="car-loc">Shinjuku</div>
           <div class="car-who" style="color:#c41e3a;">Patrick</div>
-          <div class="car-tags"><span class="activity-tag at-type">Bar</span><span class="activity-tag at-book">Walk-in</span><span class="activity-tag at-tip">Evening Best</span></div>
+          <div class="car-tags"><span class="activity-tag at-type">Bar</span><span class="activity-tag at-book">Walk-in</span><span class="activity-tag at-tip">PM Best</span></div>
           <a href="https://maps.google.com/?q=Golden+Gai+Shinjuku+Tokyo" target="_blank" class="car-map">Maps ↗</a>
         </div>
 
@@ -4051,7 +4195,7 @@
           <div class="car-name">Eorzea Cafe</div>
           <div class="car-loc">Akihabara</div>
           <div class="car-who" style="color:#c41e3a;">Patrick</div>
-          <div class="car-tags"><span class="activity-tag at-type">Cafe</span><span class="activity-tag at-book">Reserve 1 Month Ahead</span><span class="activity-tag at-tip">Group Split Option</span></div>
+          <div class="car-tags"><span class="activity-tag at-type">Cafe</span><span class="activity-tag at-book">Book Ahead</span><span class="activity-tag at-tip">Can Split</span></div>
           <a href="https://maps.google.com/?q=Eorzea+Cafe+Akihabara+Tokyo" target="_blank" class="car-map">Maps ↗</a>
         </div>
 
@@ -4059,7 +4203,7 @@
           <div class="car-name">Ghibli Museum</div>
           <div class="car-loc">Mitaka · ~20min from Shinjuku</div>
           <div class="car-who" style="color:#c41e3a;">Patrick</div>
-          <div class="car-tags"><span class="activity-tag at-type">Museum</span><span class="activity-tag at-cost">¥1,000–2,000</span><span class="activity-tag at-book">Strict Booking — 10th of Month</span></div>
+          <div class="car-tags"><span class="activity-tag at-type">Museum</span><span class="activity-tag at-cost">¥1,000–2,000</span><span class="activity-tag at-book">Dec 10 Booking</span></div>
           <a href="https://maps.google.com/?q=Ghibli+Museum+Mitaka+Tokyo" target="_blank" class="car-map">Maps ↗</a>
         </div>
 
@@ -4067,7 +4211,7 @@
           <div class="car-name">Kirby Cafe</div>
           <div class="car-loc">Tokyo Skytree · Solamachi</div>
           <div class="car-who" style="color:#c41e3a;">Patrick</div>
-          <div class="car-tags"><span class="activity-tag at-type">Cafe</span><span class="activity-tag at-cost">¥1,500–2,500</span><span class="activity-tag at-book">Strict Booking — 10th of Month 6pm JST</span></div>
+          <div class="car-tags"><span class="activity-tag at-type">Cafe</span><span class="activity-tag at-cost">¥1,500–2,500</span><span class="activity-tag at-book">Dec 10 6pm JST</span></div>
           <a href="https://maps.google.com/?q=Kirby+Cafe+Tokyo+Skytree+Solamachi" target="_blank" class="car-map">Maps ↗</a>
         </div>
 
@@ -4075,7 +4219,7 @@
           <div class="car-name">Karaoke Kan</div>
           <div class="car-loc">Multiple Locations</div>
           <div class="car-who" style="color:#c41e3a;">Patrick</div>
-          <div class="car-tags"><span class="activity-tag at-type">Karaoke</span><span class="activity-tag at-book">Walk-in or Reserve</span><span class="activity-tag at-tip">Shibuya Rooms 601/602</span></div>
+          <div class="car-tags"><span class="activity-tag at-type">Karaoke</span><span class="activity-tag at-book">Walk-in</span><span class="activity-tag at-tip">601/602</span></div>
           <a href="https://maps.google.com/?q=Karaoke+Kan+Shibuya+Tokyo" target="_blank" class="car-map">Maps ↗</a>
         </div>
 
@@ -4083,7 +4227,7 @@
           <div class="car-name">Tsukiji Market</div>
           <div class="car-loc">Tsukiji</div>
           <div class="car-who" style="color:#3b82f6;">Jake</div>
-          <div class="car-tags"><span class="activity-tag at-type">Market</span><span class="activity-tag at-cost">Free Entry</span><span class="activity-tag at-tip">Morning Best</span></div>
+          <div class="car-tags"><span class="activity-tag at-type">Market</span><span class="activity-tag at-cost">Free Entry</span><span class="activity-tag at-tip">AM Best</span></div>
           <a href="https://maps.google.com/?q=Tsukiji+Outer+Market+Tokyo" target="_blank" class="car-map">Maps ↗</a>
         </div>
 
@@ -4091,7 +4235,7 @@
           <div class="car-name">Tacos 3Hermanos</div>
           <div class="car-loc">Harajuku</div>
           <div class="car-who" style="color:#3b82f6;">Jake</div>
-          <div class="car-tags"><span class="activity-tag at-type">Restaurant</span><span class="activity-tag at-cost">~¥2,000</span><span class="activity-tag at-warn">Sells Out by 1pm</span></div>
+          <div class="car-tags"><span class="activity-tag at-type">Restaurant</span><span class="activity-tag at-cost">~¥2,000</span><span class="activity-tag at-warn">Sells Out Early</span></div>
           <a href="https://maps.google.com/?q=Tacos+3Hermanos+Harajuku+Tokyo" target="_blank" class="car-map">Maps ↗</a>
         </div>
 
@@ -4100,14 +4244,14 @@
           <div class="car-name">Snoopy Museum Tokyo</div>
           <div class="car-loc">Machida · ~35min from Shibuya</div>
           <div class="car-who" style="color:#6a6a6a;">Steve</div>
-          <div class="car-tags"><span class="activity-tag at-type">Museum</span><span class="activity-tag at-cost">¥1,800</span><span class="activity-tag at-book">Book Ahead</span><span class="activity-tag at-tip">~35min from Shibuya</span></div>
+          <div class="car-tags"><span class="activity-tag at-type">Museum</span><span class="activity-tag at-cost">¥1,800</span><span class="activity-tag at-book">Book Ahead</span><span class="activity-tag at-tip">~35min away</span></div>
           <a href="https://maps.google.com/?q=Snoopy+Museum+Tokyo+Minami-machida+Grandberry+Park" target="_blank" class="car-map">Maps ↗</a>
         </div>
         <div class="city-activity-row">
           <div class="car-name">Gyukatsu Motomura</div>
           <div class="car-loc">Multiple Locations</div>
           <div class="car-who" style="color:#3b82f6;">Jake</div>
-          <div class="car-tags"><span class="activity-tag at-type">Restaurant</span><span class="activity-tag at-cost">¥1,930–3,060</span><span class="activity-tag at-tip">Expect Lines</span></div>
+          <div class="car-tags"><span class="activity-tag at-type">Restaurant</span><span class="activity-tag at-cost">¥1,930–3,060</span><span class="activity-tag at-tip">Busy</span></div>
           <a href="https://maps.google.com/?q=Gyukatsu+Motomura+Shibuya+Tokyo" target="_blank" class="car-map">Maps ↗</a>
         </div>
 
@@ -4128,6 +4272,7 @@
         </div>
 
 
+      </div>
       </div>
     </div>
 
@@ -4171,11 +4316,15 @@
     </div>
 
     <div style="background:var(--light);padding:2px;">
-      <div style="background:var(--ink);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;">
+      <div onclick="toggleCityActivities(this)" style="background:var(--ink);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;">
         <span style="font-family:'Shippori Mincho',serif;font-size:16px;font-weight:800;color:var(--white);">Listed Activities</span>
-        <span style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);">12 total</span>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <span style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);">12 total</span>
+          <span class="city-act-arrow" style="color:var(--gold);font-size:13px;transition:transform 0.3s ease;">&#9660;</span>
+        </div>
       </div>
-      <div style="background:var(--white);">
+      <div class="city-act-panel" style="max-height:0;overflow:hidden;transition:max-height 0.45s ease,opacity 0.3s ease;opacity:0;">
+        <div style="background:var(--white);">
 
         <div class="city-activity-row">
           <div class="car-name">Nishiki Market</div>
@@ -4189,7 +4338,7 @@
           <div class="car-name">Pontocho Alley</div>
           <div class="car-loc">Central Kyoto · Kamo River</div>
           <div class="car-who" style="color:#3b82f6;">Jake</div>
-          <div class="car-tags"><span class="activity-tag at-type">Bar</span><span class="activity-tag at-type">Restaurant</span><span class="activity-tag at-tip">Evening Best</span></div>
+          <div class="car-tags"><span class="activity-tag at-type">Bar</span><span class="activity-tag at-type">Restaurant</span><span class="activity-tag at-tip">PM Best</span></div>
           <a href="https://maps.google.com/?q=Pontocho+Alley+Kyoto" target="_blank" class="car-map">Maps ↗</a>
         </div>
 
@@ -4197,7 +4346,7 @@
           <div class="car-name">Kinkaku-ji (Golden Pavilion)</div>
           <div class="car-loc">Kita · Northern Kyoto</div>
           <div class="car-who" style="color:#3b82f6;">Jake</div>
-          <div class="car-tags"><span class="activity-tag at-type">Temple</span><span class="activity-tag at-cost">¥400</span><span class="activity-tag at-tip">Arrive Early</span></div>
+          <div class="car-tags"><span class="activity-tag at-type">Temple</span><span class="activity-tag at-cost">¥400</span><span class="activity-tag at-tip">Go Early</span></div>
           <a href="https://maps.google.com/?q=Kinkaku-ji+Golden+Pavilion+Kyoto" target="_blank" class="car-map">Maps ↗</a>
         </div>
 
@@ -4221,7 +4370,7 @@
           <div class="car-name">Fushimi Inari Shrine</div>
           <div class="car-loc">Fushimi · Southern Kyoto</div>
           <div class="car-who" style="color:#3b82f6;">Jake</div>
-          <div class="car-tags"><span class="activity-tag at-type">Shrine</span><span class="activity-tag at-cost">Free</span><span class="activity-tag at-tip">Sunrise Recommended</span></div>
+          <div class="car-tags"><span class="activity-tag at-type">Shrine</span><span class="activity-tag at-cost">Free</span><span class="activity-tag at-tip">Sunrise</span></div>
           <a href="https://maps.google.com/?q=Fushimi+Inari+Shrine+Kyoto" target="_blank" class="car-map">Maps ↗</a>
         </div>
 
@@ -4237,7 +4386,7 @@
           <div class="car-name">Arashiyama Bamboo Forest</div>
           <div class="car-loc">Arashiyama · Western Kyoto</div>
           <div class="car-who" style="color:#3b82f6;">Jake</div>
-          <div class="car-tags"><span class="activity-tag at-type">Nature</span><span class="activity-tag at-cost">Free</span><span class="activity-tag at-tip">Morning Best</span></div>
+          <div class="car-tags"><span class="activity-tag at-type">Nature</span><span class="activity-tag at-cost">Free</span><span class="activity-tag at-tip">AM Best</span></div>
           <a href="https://maps.google.com/?q=Arashiyama+Bamboo+Forest+Kyoto" target="_blank" class="car-map">Maps ↗</a>
         </div>
 
@@ -4245,7 +4394,7 @@
           <div class="car-name">Otagi Nenbutsu-ji Temple</div>
           <div class="car-loc">Arashiyama · Western Kyoto</div>
           <div class="car-who" style="color:#3b82f6;">Jake</div>
-          <div class="car-tags"><span class="activity-tag at-type">Temple</span><span class="activity-tag at-cost">¥300</span><span class="activity-tag at-tip">Hidden Gem · Low Crowds</span></div>
+          <div class="car-tags"><span class="activity-tag at-type">Temple</span><span class="activity-tag at-cost">¥300</span><span class="activity-tag at-tip">Hidden Gem</span></div>
           <a href="https://maps.google.com/?q=Otagi+Nenbutsu+ji+Temple+Kyoto" target="_blank" class="car-map">Maps ↗</a>
         </div>
 
@@ -4253,7 +4402,7 @@
           <div class="car-name">Higashiyama District</div>
           <div class="car-loc">Higashiyama · Eastern Kyoto</div>
           <div class="car-who" style="color:#3b82f6;">Jake</div>
-          <div class="car-tags"><span class="activity-tag at-type">Nature</span><span class="activity-tag at-type">Shopping</span><span class="activity-tag at-cost">Free to Wander</span></div>
+          <div class="car-tags"><span class="activity-tag at-type">Nature</span><span class="activity-tag at-type">Shopping</span><span class="activity-tag at-cost">Free Entry</span></div>
           <a href="https://maps.google.com/?q=Higashiyama+District+Kyoto" target="_blank" class="car-map">Maps ↗</a>
         </div>
 
@@ -4261,7 +4410,7 @@
           <div class="car-name">Hōkan-ji (Yasaka Pagoda)</div>
           <div class="car-loc">Higashiyama · Eastern Kyoto</div>
           <div class="car-who" style="color:#3b82f6;">Jake</div>
-          <div class="car-tags"><span class="activity-tag at-type">Temple</span><span class="activity-tag at-cost">Free (exterior)</span><span class="activity-tag at-tip">Photo Spot</span></div>
+          <div class="car-tags"><span class="activity-tag at-type">Temple</span><span class="activity-tag at-cost">Free Entry</span><span class="activity-tag at-tip">Photo Spot</span></div>
           <a href="https://maps.google.com/?q=Yasaka+Pagoda+Hokanji+Kyoto" target="_blank" class="car-map">Maps ↗</a>
         </div>
 
@@ -4273,6 +4422,7 @@
           <a href="https://maps.google.com/?q=Kiyomizudera+Temple+Kyoto" target="_blank" class="car-map">Maps ↗</a>
         </div>
 
+      </div>
       </div>
     </div>
 
@@ -4316,17 +4466,21 @@
     </div>
 
     <div style="background:var(--light);padding:2px;">
-      <div style="background:var(--ink);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;">
+      <div onclick="toggleCityActivities(this)" style="background:var(--ink);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;">
         <span style="font-family:'Shippori Mincho',serif;font-size:16px;font-weight:800;color:var(--white);">Listed Activities</span>
-        <span style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);">6 total</span>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <span style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);">6 total</span>
+          <span class="city-act-arrow" style="color:var(--gold);font-size:13px;transition:transform 0.3s ease;">&#9660;</span>
+        </div>
       </div>
-      <div style="background:var(--white);">
+      <div class="city-act-panel" style="max-height:0;overflow:hidden;transition:max-height 0.45s ease,opacity 0.3s ease;opacity:0;">
+        <div style="background:var(--white);">
 
         <div class="city-activity-row">
           <div class="car-name">Silver Ball Planet</div>
           <div class="car-loc">Amerika-mura · Shinsaibashi BIGSTEP 3F</div>
           <div class="car-who" style="color:#c41e3a;">Patrick</div>
-          <div class="car-tags"><span class="activity-tag at-type">Arcade</span><span class="activity-tag at-type">Pinball</span><span class="activity-tag at-cost">Free Entry · ¥100/game</span></div>
+          <div class="car-tags"><span class="activity-tag at-type">Arcade</span><span class="activity-tag at-type">Pinball</span><span class="activity-tag at-cost">¥100/game</span></div>
           <a href="https://maps.google.com/?q=Silver+Ball+Planet+Shinsaibashi+BIGSTEP+Osaka" target="_blank" class="car-map">Maps ↗</a>
         </div>
 
@@ -4335,14 +4489,14 @@
           <div class="car-name">Dragon Quest Island</div>
           <div class="car-loc">Awaji Island · ~1hr from Osaka</div>
           <div class="car-who" style="color:#c41e3a;">Patrick</div>
-          <div class="car-tags"><span class="activity-tag at-type">Theme Park</span><span class="activity-tag at-cost">¥3,500–4,500</span><span class="activity-tag at-book">Book Ahead</span><span class="activity-tag at-tip">Full Day Trip</span></div>
+          <div class="car-tags"><span class="activity-tag at-type">Theme Park</span><span class="activity-tag at-cost">¥3,500–4,500</span><span class="activity-tag at-book">Book Ahead</span><span class="activity-tag at-tip">Day Trip</span></div>
           <a href="https://maps.google.com/?q=Nijigen+no+Mori+Dragon+Quest+Island+Awaji+Island" target="_blank" class="car-map">Maps ↗</a>
         </div>
         <div class="city-activity-row">
           <div class="car-name">Eorzea Cafe</div>
           <div class="car-loc">Dotonbori</div>
           <div class="car-who" style="color:#c41e3a;">Patrick</div>
-          <div class="car-tags"><span class="activity-tag at-type">Cafe</span><span class="activity-tag at-type">Restaurant</span><span class="activity-tag at-book">Reserve 1 Month Ahead</span></div>
+          <div class="car-tags"><span class="activity-tag at-type">Cafe</span><span class="activity-tag at-type">Restaurant</span><span class="activity-tag at-book">Book Ahead</span></div>
           <a href="https://maps.google.com/?q=Eorzea+Cafe+Dotonbori+Osaka" target="_blank" class="car-map">Maps ↗</a>
         </div>
 
@@ -4351,7 +4505,7 @@
           <div class="car-name">The Münch</div>
           <div class="car-loc">Yao · ~30min from Osaka</div>
           <div class="car-who" style="color:#3b82f6;">Jake</div>
-          <div class="car-tags"><span class="activity-tag at-type">Cafe</span><span class="activity-tag at-cost">¥1,000–2,000</span><span class="activity-tag at-cost">Cash Only</span><span class="activity-tag at-tip">~30min from Osaka</span></div>
+          <div class="car-tags"><span class="activity-tag at-type">Cafe</span><span class="activity-tag at-cost">¥1,000–2,000</span><span class="activity-tag at-cost">Cash Only</span><span class="activity-tag at-tip">~30min away</span></div>
           <a href="https://maps.google.com/?q=The+Munch+coffee+Yao+Osaka" target="_blank" class="car-map">Maps ↗</a>
         </div>
 
@@ -4359,12 +4513,13 @@
           <div class="car-name">Izakaya Toyo</div>
           <div class="car-loc">Kyobashi</div>
           <div class="car-who" style="color:#3b82f6;">Jake</div>
-          <div class="car-tags"><span class="activity-tag at-type">Restaurant</span><span class="activity-tag at-type">Izakaya</span><span class="activity-tag at-cost">¥2,400–3,200</span><span class="activity-tag at-warn">Closed Thu / Sun / Mon</span></div>
+          <div class="car-tags"><span class="activity-tag at-type">Restaurant</span><span class="activity-tag at-type">Izakaya</span><span class="activity-tag at-cost">¥2,400–3,200</span><span class="activity-tag at-warn">Closed Thu+</span></div>
           <a href="https://maps.google.com/?q=Izakaya+Toyo+Kyobashi+Osaka" target="_blank" class="car-map">Maps ↗</a>
         </div>
 
       </div>
     </div>
+      </div>
 
   </div>
 
@@ -4384,9 +4539,9 @@
     </div>
   </div>
 
-  <div style="max-width:1400px;margin:0 auto;padding:0 40px 60px;">
+  <div class="day-trips-outer">
 
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--light);margin:40px 0 2px;">
+    <div class="day-trips-info-grid">
       <div style="background:var(--white);padding:28px;">
         <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:8px;">When to Go</div>
         <div style="font-size:13px;line-height:1.8;color:var(--ink);">Day 14 is the dedicated day trip slot in the itinerary. Nara can also be done as an evening stop on Day 7 transit day alongside Yamayaki. Most destinations are fastest to reach from Osaka.</div>
@@ -4409,12 +4564,12 @@
     <div style="display:flex;flex-direction:column;gap:2px;background:var(--light);">
 
       <!-- Dragon Quest Island -->
-      <div style="background:var(--white);padding:36px;">
-        <div style="display:grid;grid-template-columns:180px 1fr;gap:40px;align-items:start;">
+      <div class="day-trip-outer">
+        <div class="day-trip-card">
           <div>
             <div style="font-family:'Shippori Mincho',serif;font-size:13px;font-weight:800;color:#4aba72;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Awaji Island</div>
             <div style="font-family:'Shippori Mincho',serif;font-size:26px;font-weight:800;line-height:1.1;margin-bottom:16px;">Dragon Quest Island</div>
-            <div style="display:flex;flex-direction:column;gap:5px;">
+            <div class="day-trip-tags">
               <span class="activity-tag at-type">Theme Park</span>
               <span class="activity-tag at-cost">¥3,500–4,500</span>
               <span class="activity-tag at-book">Book Ahead</span>
@@ -4425,7 +4580,7 @@
           <div>
             <p style="font-size:13px;line-height:1.85;color:#333;margin-bottom:16px;">Outdoor field RPG experience inside Nijigen no Mori theme park on Awaji Island, Hyogo Prefecture. Form a party of up to 4, choose your class, and explore a real-world recreation of the Dragon Quest universe with physical challenges, digital characters, puzzles, and boss encounters. The course takes 2&ndash;3 hours to complete. Fully available in English.</p>
             <p style="font-size:13px;line-height:1.85;color:#333;margin-bottom:20px;">Nijigen no Mori also contains a Naruto/Boruto zone and a Godzilla zip-line as separate tickets &mdash; the park is worth the full day even beyond Dragon Quest. Take the highway bus from Osaka Namba or Shin-Osaka Station (~60min). Book Dragon Quest tickets in advance online &mdash; it sells out on weekends but January weekdays should have availability.</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--muted);border-top:1px solid var(--light);padding-top:14px;">
+            <div class="day-trip-meta">
               <span><strong style="color:var(--ink);">Who:</strong> Patrick &middot; Jake &middot; Steve (option)</span>
               <span><strong style="color:var(--ink);">From:</strong> Osaka (~1hr highway bus)</span>
               <span><strong style="color:var(--ink);">Itinerary:</strong> Day 14, Option A</span>
@@ -4436,23 +4591,23 @@
       </div>
 
       <!-- Snoopy Museum -->
-      <div style="background:var(--white);padding:36px;">
-        <div style="display:grid;grid-template-columns:180px 1fr;gap:40px;align-items:start;">
+      <div class="day-trip-outer">
+        <div class="day-trip-card">
           <div>
             <div style="font-family:'Shippori Mincho',serif;font-size:13px;font-weight:800;color:#4aba72;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Machida · Tokyo Suburbs</div>
             <div style="font-family:'Shippori Mincho',serif;font-size:26px;font-weight:800;line-height:1.1;margin-bottom:16px;">Snoopy Museum Tokyo</div>
-            <div style="display:flex;flex-direction:column;gap:5px;">
+            <div class="day-trip-tags">
               <span class="activity-tag at-type">Museum</span>
-              <span class="activity-tag at-cost">¥1,800/person</span>
+              <span class="activity-tag at-cost">¥1,800/pp</span>
               <span class="activity-tag at-book">Book Ahead</span>
               <span class="activity-tag at-tip">Half Day</span>
-              <span class="activity-tag at-tip">~35min from Shibuya</span>
+              <span class="activity-tag at-tip">~35min away</span>
             </div>
           </div>
           <div>
             <p style="font-size:13px;line-height:1.85;color:#333;margin-bottom:16px;">The world&apos;s only satellite of the Charles M. Schulz Museum in Santa Rosa, California. Features original Peanuts comic strips, vintage memorabilia, a life-size Snoopy room, the exclusive BROWN&apos;S STORE merchandise shop, and the adjacent PEANUTS Cafe. Located in Minami-machida Grandberry Park shopping complex &mdash; a sizeable outdoor mall with other shops and restaurants to extend the visit.</p>
             <p style="font-size:13px;line-height:1.85;color:#333;margin-bottom:20px;">The museum itself takes about 1.5&ndash;2 hours. Combined with the shopping mall and lunch at the PEANUTS Cafe, a comfortable half-day trip from Shibuya. Take the Tokyu Denentoshi Line express (~35min, ¥310) to Minami-machida Grandberry Park Station &mdash; it&apos;s right outside. Moved here from the Tokyo activities list as it requires a dedicated suburban half-day rather than combining naturally with central Tokyo activities.</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--muted);border-top:1px solid var(--light);padding-top:14px;">
+            <div class="day-trip-meta">
               <span><strong style="color:var(--ink);">Who:</strong> Steve (primary)</span>
               <span><strong style="color:var(--ink);">From:</strong> Shibuya (~35min Tokyu Denentoshi Line)</span>
               <span><strong style="color:var(--ink);">Itinerary:</strong> Tokyo Days 5&ndash;6 split day</span>
@@ -4463,24 +4618,24 @@
       </div>
 
       <!-- Yokohama -->
-      <div style="background:var(--white);padding:36px;">
-        <div style="display:grid;grid-template-columns:180px 1fr;gap:40px;align-items:start;">
+      <div class="day-trip-outer">
+        <div class="day-trip-card">
           <div>
             <div style="font-family:'Shippori Mincho',serif;font-size:13px;font-weight:800;color:#4aba72;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Kanagawa Prefecture</div>
             <div style="font-family:'Shippori Mincho',serif;font-size:26px;font-weight:800;line-height:1.1;margin-bottom:16px;">Yokohama</div>
-            <div style="display:flex;flex-direction:column;gap:5px;">
+            <div class="day-trip-tags">
               <span class="activity-tag at-type">Market</span>
               <span class="activity-tag at-type">Museum</span>
-              <span class="activity-tag at-cost">Free to Explore</span>
+              <span class="activity-tag at-cost">Free Entry</span>
               <span class="activity-tag at-book">Walk-in</span>
               <span class="activity-tag at-tip">Half to Full Day</span>
-              <span class="activity-tag at-tip">~30min from Shinjuku</span>
+              <span class="activity-tag at-tip">~30min away</span>
             </div>
           </div>
           <div>
             <p style="font-size:13px;line-height:1.85;color:#333;margin-bottom:16px;">Japan&apos;s second-largest city with a completely distinct character from Tokyo. The Minato Mirai waterfront district features Landmark Tower, the Cosmo Clock 21 ferris wheel, and the Red Brick Warehouse. Japan&apos;s largest Chinatown (Yokohama Chinatown) has over 500 restaurants and shops across a compact warren of streets. The Cup Noodles Museum in Minato Mirai lets you design and take home a custom instant noodle cup &mdash; a Patrick and Jake activity if there ever was one.</p>
             <p style="font-size:13px;line-height:1.85;color:#333;margin-bottom:20px;">Take the Shonan-Shinjuku Line direct from Shinjuku (~30min, &yen;570) or the Keikyu Line from Shinagawa. The city is compact enough to walk between major areas. A half-day is comfortable for the waterfront and Chinatown; a full day covers the bluff district and further afield. Easy to pair with Shin-Yokohama Ramen Museum on the same day.</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--muted);border-top:1px solid var(--light);padding-top:14px;">
+            <div class="day-trip-meta">
               <span><strong style="color:var(--ink);">Who:</strong> Patrick (primary) &middot; Jake &middot; all group</span>
               <span><strong style="color:var(--ink);">From:</strong> Shinjuku (~30min direct)</span>
               <span><strong style="color:var(--ink);">Itinerary:</strong> Tokyo flex day, Days 5&ndash;6</span>
@@ -4491,17 +4646,17 @@
       </div>
 
       <!-- Kusatsu Onsen -->
-      <div style="background:var(--white);padding:36px;">
-        <div style="display:grid;grid-template-columns:180px 1fr;gap:40px;align-items:start;">
+      <div class="day-trip-outer">
+        <div class="day-trip-card">
           <div>
             <div style="font-family:'Shippori Mincho',serif;font-size:13px;font-weight:800;color:#4aba72;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Gunma Prefecture</div>
             <div style="font-family:'Shippori Mincho',serif;font-size:26px;font-weight:800;line-height:1.1;margin-bottom:16px;">Kusatsu Onsen</div>
-            <div style="display:flex;flex-direction:column;gap:5px;">
+            <div class="day-trip-tags">
               <span class="activity-tag at-type">Nature</span>
               <span class="activity-tag at-cost">Free Public Baths</span>
-              <span class="activity-tag at-cost">¥600–800 Paid Baths</span>
+              <span class="activity-tag at-cost">¥600–800</span>
               <span class="activity-tag at-book">Walk-in</span>
-              <span class="activity-tag at-tip">Full Day or Overnight</span>
+              <span class="activity-tag at-tip">Full Day</span>
               <span class="activity-tag at-tip">~3hrs from Tokyo</span>
               <span class="activity-tag at-tip">Snow in January</span>
             </div>
@@ -4509,7 +4664,7 @@
           <div>
             <p style="font-size:13px;line-height:1.85;color:#333;margin-bottom:16px;">Japan&apos;s most celebrated onsen resort town, situated at 1,200m in the Gunma mountains. The centrepiece is the Yubatake &mdash; a wooden grid at the town centre through which 32,000 litres of near-boiling sulphuric spring water flows every minute, steaming dramatically in the winter cold. It is one of the most striking natural sights in all of Japan. Multiple free public foot baths surround the Yubatake; the Netsunoyu bath ceremony involves town attendants stirring the scalding water with wooden paddles to cool it.</p>
             <p style="font-size:13px;line-height:1.85;color:#333;margin-bottom:20px;">In January the town is deep in snow and the contrast of the steaming hot spring against the white landscape is extraordinary &mdash; vlog gold for Patrick. The direct JR bus from Shinjuku Expressway Bus Terminal takes 2hr 50min each way and runs frequently. An overnight stay at a ryokan (traditional inn with meals included) is the ideal way to experience it, though a very early start makes a single day possible.</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--muted);border-top:1px solid var(--light);padding-top:14px;">
+            <div class="day-trip-meta">
               <span><strong style="color:var(--ink);">Who:</strong> Patrick (primary) &middot; Steve &middot; all group</span>
               <span><strong style="color:var(--ink);">From:</strong> Shinjuku Bus Terminal (~2hr 50min JR bus)</span>
               <span><strong style="color:var(--ink);">Itinerary:</strong> Tokyo flex days &mdash; overnight ideally</span>
@@ -4520,25 +4675,25 @@
       </div>
 
       <!-- Kobe -->
-      <div style="background:var(--white);padding:36px;">
-        <div style="display:grid;grid-template-columns:180px 1fr;gap:40px;align-items:start;">
+      <div class="day-trip-outer">
+        <div class="day-trip-card">
           <div>
             <div style="font-family:'Shippori Mincho',serif;font-size:13px;font-weight:800;color:#4aba72;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Hyogo Prefecture</div>
             <div style="font-family:'Shippori Mincho',serif;font-size:26px;font-weight:800;line-height:1.1;margin-bottom:16px;">Kobe</div>
-            <div style="display:flex;flex-direction:column;gap:5px;">
+            <div class="day-trip-tags">
               <span class="activity-tag at-type">Restaurant</span>
               <span class="activity-tag at-type">Market</span>
-              <span class="activity-tag at-cost">Free to Explore</span>
-              <span class="activity-tag at-cost">Kobe Beef ¥5,000–15,000</span>
+              <span class="activity-tag at-cost">Free Entry</span>
+              <span class="activity-tag at-cost">Kobe Beef</span>
               <span class="activity-tag at-book">Walk-in</span>
               <span class="activity-tag at-tip">Half to Full Day</span>
-              <span class="activity-tag at-tip">~30min from Osaka</span>
+              <span class="activity-tag at-tip">~30min away</span>
             </div>
           </div>
           <div>
             <p style="font-size:13px;line-height:1.85;color:#333;margin-bottom:16px;">A port city shaped by its 19th-century foreign settlement, with a cosmopolitan character unlike anywhere else in Japan. Kitano-cho is a preserved hilltop district of Victorian and colonial-era foreign merchant residences now open as museums &mdash; strikingly unusual in a Japanese city. Nankinmachi (Kobe Chinatown) is compact but lively. The Harborland waterfront and Meriken Park have excellent views and the KOBE sign for photos.</p>
             <p style="font-size:13px;line-height:1.85;color:#333;margin-bottom:20px;">Kobe beef teppanyaki here is significantly cheaper than in Tokyo &mdash; for the full experience, book a teppanyaki counter (Mouriya or Steakland are reliable, ~&yen;8,000&ndash;15,000/person) or try the yakiniku option (~&yen;5,000) for a more casual approach. Jake and Conner would love this for the food angle. Take JR Kobe Line or Hankyu from Osaka (~30min, ~&yen;400). Very natural to combine Kobe morning with an Osaka afternoon on any Osaka day.</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--muted);border-top:1px solid var(--light);padding-top:14px;">
+            <div class="day-trip-meta">
               <span><strong style="color:var(--ink);">Who:</strong> Patrick (primary) &middot; Jake &middot; Conner &middot; all group</span>
               <span><strong style="color:var(--ink);">From:</strong> Osaka (~30min JR/Hankyu, ~&yen;400)</span>
               <span><strong style="color:var(--ink);">Itinerary:</strong> Osaka Days 13&ndash;15, morning trip</span>
@@ -4549,27 +4704,27 @@
       </div>
 
       <!-- Mount Fuji -->
-      <div style="background:var(--white);padding:36px;">
-        <div style="display:grid;grid-template-columns:180px 1fr;gap:40px;align-items:start;">
+      <div class="day-trip-outer">
+        <div class="day-trip-card">
           <div>
             <div style="font-family:'Shippori Mincho',serif;font-size:13px;font-weight:800;color:#4aba72;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Yamanashi Prefecture</div>
             <div style="font-family:'Shippori Mincho',serif;font-size:26px;font-weight:800;line-height:1.1;margin-bottom:16px;">Mount Fuji (Kawaguchiko)</div>
-            <div style="display:flex;flex-direction:column;gap:5px;">
+            <div class="day-trip-tags">
               <span class="activity-tag at-type">Nature</span>
               <span class="activity-tag at-cost">Free Views</span>
               <span class="activity-tag at-cost">Ropeway ¥900</span>
               <span class="activity-tag at-cost">Pagoda ¥400</span>
               <span class="activity-tag at-book">Walk-in</span>
               <span class="activity-tag at-tip">Full Day</span>
-              <span class="activity-tag at-tip">~2hrs from Shinjuku</span>
-              <span class="activity-tag at-warn">Climbing closed in January</span>
-              <span class="activity-tag at-tip">Best Views of the Year</span>
+              <span class="activity-tag at-tip">~2hr away</span>
+              <span class="activity-tag at-warn">No Climbing Jan</span>
+              <span class="activity-tag at-tip">Best Views</span>
             </div>
           </div>
           <div>
             <p style="font-size:13px;line-height:1.85;color:#333;margin-bottom:16px;">January is statistically one of the best months to see Mount Fuji. The summit is fully snow-capped, the air is at its clearest, and the tourist numbers are at their annual low. The climbing trails are closed (they open only in July&ndash;early September), but the Fuji Five Lakes area &mdash; particularly Kawaguchiko &mdash; provides spectacular views from ground level and elevated lookout points.</p>
             <p style="font-size:13px;line-height:1.85;color:#333;margin-bottom:20px;">Key spots: the Chureito Pagoda viewpoint (the five-storey pagoda with Fuji behind it &mdash; climb 398 steps for the iconic shot); the Kawaguchiko shoreline for lake reflections; Kachi Kachi Mountain Ropeway (open year-round, ~&yen;900) for aerial views; and Oshino Hakkai (eight sacred ponds fed by Fuji snowmelt). Direct Fuji Express highway buses from Shinjuku Bus Terminal run every 30&ndash;60min (~1hr 45min, ~&yen;1,800 one way). For Patrick and Jake the vlogging potential here is extraordinary &mdash; no other day on the trip produces footage like this.</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--muted);border-top:1px solid var(--light);padding-top:14px;">
+            <div class="day-trip-meta">
               <span><strong style="color:var(--ink);">Who:</strong> Patrick (primary) &middot; Jake &middot; all group</span>
               <span><strong style="color:var(--ink);">From:</strong> Shinjuku Bus Terminal (~1hr 45min direct bus)</span>
               <span><strong style="color:var(--ink);">Itinerary:</strong> Tokyo flex day, Days 5&ndash;6</span>
@@ -4580,25 +4735,25 @@
       </div>
 
       <!-- Nakasendo -->
-      <div style="background:var(--white);padding:36px;">
-        <div style="display:grid;grid-template-columns:180px 1fr;gap:40px;align-items:start;">
+      <div class="day-trip-outer">
+        <div class="day-trip-card">
           <div>
             <div style="font-family:'Shippori Mincho',serif;font-size:13px;font-weight:800;color:#4aba72;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Nagano Prefecture</div>
             <div style="font-family:'Shippori Mincho',serif;font-size:26px;font-weight:800;line-height:1.1;margin-bottom:16px;">Nakasendo Trail</div>
-            <div style="display:flex;flex-direction:column;gap:5px;">
+            <div class="day-trip-tags">
               <span class="activity-tag at-type">Nature</span>
               <span class="activity-tag at-cost">Free Trail</span>
-              <span class="activity-tag at-cost">Transport ~¥5,000–7,000</span>
+              <span class="activity-tag at-cost">~¥5,000 transport</span>
               <span class="activity-tag at-book">Walk-in</span>
               <span class="activity-tag at-tip">Full Day</span>
-              <span class="activity-tag at-tip">~3hrs from Tokyo or Kyoto</span>
+              <span class="activity-tag at-tip">~3hr day trip</span>
               <span class="activity-tag at-tip">Snow in January</span>
             </div>
           </div>
           <div>
             <p style="font-size:13px;line-height:1.85;color:#333;margin-bottom:16px;">The Nakasendo was one of the five great Edo-period highways connecting Tokyo (Edo) and Kyoto through the central mountains. The 8km section between the post towns of Magome and Tsumago in the Kiso Valley, Nagano Prefecture, is the best-preserved stretch and can be walked in 2&ndash;3 hours. The trail passes through cedar forests, stone-paved mountain paths, waterfalls, and traditional farmhouses &mdash; all unchanged from the Edo period.</p>
             <p style="font-size:13px;line-height:1.85;color:#333;margin-bottom:20px;">Magome and Tsumago themselves are exquisitely preserved post towns where no modern signage, vending machines, or telegraph poles are visible &mdash; they look exactly as they did 300 years ago. In January the trail is snow-dusted and virtually empty. This is unlike anything else on the itinerary and produces the most cinematic vlog footage of the trip. Reach Nagiso Station by Shinkansen to Nagoya (~1hr 45min) then Chuo Line limited express (~45min). Works either from Tokyo or as a stop between Kyoto and Tokyo. A taxi or bus connects Magome and Tsumago for the return.</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--muted);border-top:1px solid var(--light);padding-top:14px;">
+            <div class="day-trip-meta">
               <span><strong style="color:var(--ink);">Who:</strong> Patrick (primary) &middot; Jake &middot; Conner</span>
               <span><strong style="color:var(--ink);">From:</strong> Tokyo (~3hrs via Nagoya) or Kyoto (~2hrs via Nagoya)</span>
               <span><strong style="color:var(--ink);">Itinerary:</strong> Tokyo flex day or between Kyoto and Osaka</span>
@@ -5342,17 +5497,17 @@
 <!-- BUDGET TAB -->
 <div id="budget" class="tab-content">
 
-  <div style="background:var(--ink);color:var(--white);padding:60px 40px;position:relative;overflow:hidden;border-bottom:3px solid #4aba72;">
+  <div style="background:var(--ink);color:var(--white);padding:clamp(36px,6vw,60px) clamp(20px,5vw,40px);position:relative;overflow:hidden;border-bottom:3px solid #4aba72;">
     <div style="position:absolute;right:40px;top:10px;font-family:'Shippori Mincho',serif;font-size:200px;font-weight:800;color:rgba(255,255,255,0.03);line-height:1;pointer-events:none;user-select:none;">¥</div>
     <div style="max-width:1400px;margin:0 auto;position:relative;">
       <div style="font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:#4aba72;margin-bottom:12px;">Estimated &middot; Per Person &middot; Adjustable</div>
       <h2 style="font-family:'Shippori Mincho',serif;font-size:clamp(40px,7vw,84px);font-weight:800;line-height:0.95;margin-bottom:24px;">Budget<br>Tracker</h2>
       <p style="font-size:14px;color:rgba(255,255,255,0.6);max-width:640px;line-height:1.8;margin-bottom:28px;">All estimates are per person based on a group of 4 splitting accommodation. Adjust the sliders to match your spending style. Exchange rate: <strong style="color:rgba(255,255,255,0.85);">¥150 = $1 USD</strong> (Jan 2027 estimate — update if needed).</p>
-      <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:center;">
+      <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;">
         <div style="font-size:11px;color:rgba(255,255,255,0.4);">Exchange rate:</div>
-        <div style="display:flex;align-items:center;gap:10px;">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
           <span style="font-size:11px;color:rgba(255,255,255,0.55);">¥130</span>
-          <input type="range" id="fx-rate" min="130" max="165" value="150" step="1" style="width:120px;accent-color:#4aba72;">
+          <input type="range" id="fx-rate" min="130" max="165" value="150" step="1" style="width:min(120px,40vw);accent-color:#4aba72;">
           <span style="font-size:11px;color:rgba(255,255,255,0.55);">¥165</span>
           <span id="fx-display" style="font-size:13px;font-weight:800;color:#4aba72;min-width:80px;">¥150 = $1</span>
         </div>
@@ -5360,31 +5515,31 @@
     </div>
   </div>
 
-  <div style="max-width:1400px;margin:0 auto;padding:40px 40px 80px;">
+  <div class="budget-outer">
 
     <!-- TOTAL BANNER -->
-    <div id="total-banner" style="background:var(--ink);color:var(--white);padding:32px 40px;margin-bottom:2px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:24px;">
+    <div id="total-banner" style="background:var(--ink);color:var(--white);padding:clamp(20px,4vw,32px) clamp(20px,5vw,40px);margin-bottom:2px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:24px;">
       <div>
         <div style="font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:#4aba72;margin-bottom:8px;">Estimated Total Per Person</div>
-        <div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;">
-          <span id="total-usd" style="font-family:'Shippori Mincho',serif;font-size:52px;font-weight:800;line-height:1;color:#4aba72;">$3,840</span>
-          <span id="total-jpy" style="font-family:'Shippori Mincho',serif;font-size:28px;font-weight:800;color:rgba(255,255,255,0.4);">¥576,000</span>
+        <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+          <span id="total-usd" style="font-family:'Shippori Mincho',serif;font-size:clamp(36px,8vw,52px);font-weight:800;line-height:1;color:#4aba72;">$3,840</span>
+          <span id="total-jpy" style="font-family:'Shippori Mincho',serif;font-size:clamp(18px,4vw,28px);font-weight:800;color:rgba(255,255,255,0.4);">¥576,000</span>
         </div>
       </div>
       <div style="text-align:right;">
         <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:8px;">Group Total (×4)</div>
-        <div id="total-group" style="font-family:'Shippori Mincho',serif;font-size:28px;font-weight:800;color:rgba(255,255,255,0.6);">$15,360</div>
+        <div id="total-group" style="font-family:'Shippori Mincho',serif;font-size:clamp(18px,4vw,28px);font-weight:800;color:rgba(255,255,255,0.6);">$15,360</div>
       </div>
     </div>
 
     <!-- VISUAL BAR CHART -->
-    <div style="background:var(--white);padding:32px 40px;margin-bottom:2px;border:1px solid var(--light);">
+    <div style="background:var(--white);padding:clamp(20px,4vw,32px) clamp(20px,5vw,40px);margin-bottom:2px;border:1px solid var(--light);">
       <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;">Spending Breakdown</div>
       <div id="bar-chart" style="display:flex;flex-direction:column;gap:10px;"></div>
     </div>
 
     <!-- CATEGORY SLIDERS -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:2px;">
+    <div class="budget-slider-grid">
 
       <!-- FLIGHTS -->
       <div class="budget-card" id="card-flights">
@@ -5400,7 +5555,7 @@
       <!-- ACCOMMODATION -->
       <div class="budget-card" id="card-accommodation">
         <div class="budget-card-label">🏠 Accommodation</div>
-        <div class="budget-card-desc">15 nights (7 Tokyo + 5 Kyoto + 3 Osaka). Private Airbnb apartment split 4 ways. ¥30,000–50,000/night whole apartment.</div>
+        <div class="budget-card-desc">15 nights (7 Tokyo + 5 Kyoto + 3 Osaka). Private Airbnb apartment split 4 ways.</div>
         <div class="budget-slider-row">
           <input type="range" class="budget-slider" id="sl-accommodation" min="7500" max="12500" value="10000" step="500" data-cat="accommodation" data-currency="jpy">
           <div class="budget-slider-labels"><span>¥7,500/night</span><span>¥12,500/night</span></div>
@@ -5430,7 +5585,7 @@
         <div class="budget-card-value"><span id="val-transport">¥40,000</span><span class="budget-card-jpy" id="usd-transport">≈ $267</span></div>
       </div>
 
-      <!-- ACTIVITIES / ADMISSIONS -->
+      <!-- ACTIVITIES -->
       <div class="budget-card" id="card-activities">
         <div class="budget-card-label">🎭 Activities & Admissions</div>
         <div class="budget-card-desc">TeamLab ¥3,200 · Ghibli ¥1,000 · Kirby Cafe ~¥3,000 · Eorzea Cafes ~¥4,000 · Temples/museums ~¥8,000 · Escape rooms ~¥4,000.</div>
@@ -5477,25 +5632,21 @@
     </div>
 
     <!-- PER-PERSON BREAKDOWN -->
-    <div style="background:var(--ink);color:var(--white);padding:32px 40px;margin-bottom:2px;">
+    <div class="budget-persons">
       <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:24px;">Estimated Per-Person Totals</div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;" id="person-totals">
-        <!-- filled by JS -->
-      </div>
+      <div class="budget-person-grid" id="person-totals"></div>
     </div>
 
     <!-- CITY BREAKDOWN -->
-    <div style="background:var(--white);padding:32px 40px;border:1px solid var(--light);">
+    <div class="budget-cities">
       <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;">On-the-Ground Costs by City</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;" id="city-breakdown">
-        <!-- filled by JS -->
-      </div>
+      <div class="budget-city-grid" id="city-breakdown"></div>
     </div>
 
     <!-- NOTES -->
-    <div style="margin-top:24px;padding:20px 28px;background:rgba(74,186,114,0.07);border:1px solid rgba(74,186,114,0.25);border-radius:3px;">
+    <div style="margin-top:24px;padding:20px 24px;background:rgba(74,186,114,0.07);border:1px solid rgba(74,186,114,0.25);border-radius:3px;">
       <div style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#4aba72;font-weight:700;margin-bottom:10px;">Notes on Estimates</div>
-      <div style="font-size:12px;color:var(--muted);line-height:1.8;display:grid;grid-template-columns:1fr 1fr;gap:4px 32px;">
+      <div class="budget-notes-grid">
         <div>· Flights assume economy class, booking Aug–Sep 2026 via CLT with one connection</div>
         <div>· Accommodation split assumes 4 people sharing throughout — any solo nights cost more</div>
         <div>· Food estimate uses a mid-range daily spend — heavy restaurant days will push higher</div>
@@ -6193,6 +6344,21 @@ function togglePerson(header) {
   header.classList.toggle('open');
 }
 
+function toggleCityActivities(header) {
+  const panel = header.nextElementSibling;
+  const arrow = header.querySelector('.city-act-arrow');
+  const isOpen = panel.style.maxHeight !== '0px' && panel.style.maxHeight !== '';
+  if (isOpen) {
+    panel.style.maxHeight = '0';
+    panel.style.opacity = '0';
+    if (arrow) arrow.style.transform = 'rotate(0deg)';
+  } else {
+    panel.style.maxHeight = panel.scrollHeight + 'px';
+    panel.style.opacity = '1';
+    if (arrow) arrow.style.transform = 'rotate(180deg)';
+  }
+}
+
 function toggleDay(block) {
   block.classList.toggle('open');
 }
@@ -6339,19 +6505,22 @@ window.addEventListener('load', function() {
     const total = Object.values(vals).reduce((a, b) => a + b, 0);
     const container = document.getElementById('bar-chart');
     container.innerHTML = '';
+    const narrow = window.innerWidth < 600;
     cats.forEach(cat => {
       const v = vals[cat.id] || 0;
       const pct = total > 0 ? (v / total * 100).toFixed(1) : 0;
       const w = total > 0 ? Math.max(2, v / total * 100) : 0;
       const row = document.createElement('div');
-      row.style.cssText = 'display:grid;grid-template-columns:140px 1fr 90px 70px;gap:12px;align-items:center;';
+      row.style.cssText = narrow
+        ? 'display:grid;grid-template-columns:100px 1fr 80px;gap:8px;align-items:center;'
+        : 'display:grid;grid-template-columns:140px 1fr 90px 70px;gap:12px;align-items:center;';
       row.innerHTML = `
         <div style="font-size:11px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${cat.label}</div>
         <div style="background:var(--light);height:10px;border-radius:2px;overflow:hidden;">
           <div style="height:100%;width:${w}%;background:${cat.color};border-radius:2px;transition:width 0.4s ease;"></div>
         </div>
         <div style="font-size:12px;font-weight:800;color:var(--ink);text-align:right;">$${Math.round(jpyToUsd(v)).toLocaleString()}</div>
-        <div style="font-size:10px;color:var(--muted);text-align:right;">${pct}%</div>
+        ${narrow ? '' : `<div style="font-size:10px;color:var(--muted);text-align:right;">${pct}%</div>`}
       `;
       container.appendChild(row);
     });

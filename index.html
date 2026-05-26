@@ -899,7 +899,7 @@
     .acts-filter-label {
       font-size: 9px; font-weight: 700; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--muted);
-      flex-shrink: 0; width: 40px; padding-top: 1px;
+      flex-shrink: 0; min-width: 52px; padding-top: 1px;
     }
     .acts-filter-btn {
       font-size: 11px; font-weight: 500; padding: 4px 10px;
@@ -2534,7 +2534,7 @@ const SITE_CONFIG = {
     {
       id:'tokyo', name:'Tokyo', kanji:'東京', days:7, nights:7,
       dayRange:'Days 1–7', dates:'Jan 9–15', startDate:'2027-01-09', endDate:'2027-01-15',
-      color:'#c41e3a', transport:'Suica IC Card', emoji:'🗼', region:'Kantō',
+      color:'#c41e3a', transport:'Tokyo Metro & JR', emoji:'🗼', region:'Kantō',
       coordinates:{ lat:35.6762, lng:139.6503 },
       weather:{ tempC:'5–10', tempF:'41–50', notes:'Dry and sunny most days, occasional overcast' },
       keyAreas:['Shinjuku','Harajuku','Akihabara','Shibuya','Shimokitazawa','Asakusa','Ueno']
@@ -3015,7 +3015,7 @@ if (typeof window !== 'undefined') window.TRIP_DATA = TRIP_DATA;
       glance: [
         { icon:'🗓️', label:'Duration',  value:'7 nights',      sub:'Jan 9–15' },
         { icon:'🌡️', label:'Weather',   value:'41–50°F',       sub:'5–10°C, dry & sunny' },
-        { icon:'🚇', label:'Transport', value:'Suica Card',    sub:'Top up at HND Day 1' },
+        { icon:'🚇', label:'Transport', value:'Tokyo Metro & JR', sub:'Suica IC Card — top up at HND Day 1' },
         { icon:'🏠', label:'Base',      value:'Airbnb',        sub:'Shinjuku/Shibuya area' },
         { icon:'🎌', label:'Region',    value:'Kantō',         sub:'Eastern Japan' },
         { icon:'💴', label:'Avg Cost',  value:'~$60/day',      sub:'Per person, excl. flights' },
@@ -3290,10 +3290,7 @@ if (typeof window !== 'undefined') window.TRIP_DATA = TRIP_DATA;
         if (!row || e.target.closest('a') || e.target.closest('.act-day-link')) return;
         row.classList.toggle('expanded');
       });
-      content.appendChild(actSection);
-    }
-
-    // Practical Info
+      // Practical Info (before activities)
     const practSection = document.createElement('div');
     practSection.className = 'section fade-in';
     practSection.innerHTML = `<div class="section-label">Practical Info</div>
@@ -3304,6 +3301,9 @@ if (typeof window !== 'undefined') window.TRIP_DATA = TRIP_DATA;
         </div>`).join('')}
       </div>`;
     content.appendChild(practSection);
+
+      content.appendChild(actSection);
+    }
 
     panel.appendChild(content);
     return panel;
@@ -3986,11 +3986,11 @@ if (typeof window !== 'undefined') window.TRIP_DATA = TRIP_DATA;
   // Default spend allocations per person (USD)
   // Derived from actual planned activities + realistic estimates
   const DEFAULT_ALLOCATIONS = {
-    patrick: { flights:1100, accommodation:600, food:900,  transport:200, activities:700, shopping:600, nightlife:400, misc:500 },
-    jake:    { flights:1000, accommodation:600, food:1200, transport:200, activities:300, shopping:500, nightlife:200, misc:1000 },
-    steve:   { flights:900,  accommodation:600, food:600,  transport:150, activities:100, shopping:150, nightlife:800, misc:700 },
-    conner:  { flights:900,  accommodation:600, food:800,  transport:150, activities:100, shopping:200, nightlife:500, misc:750 },
-    boros:   { flights:1000, accommodation:600, food:700,  transport:150, activities:50,  shopping:200, nightlife:900, misc:1400 },
+    patrick: { flights:1500, accommodation:600, food:900, transport:200, activities:700, shopping:600, nightlife:400, misc:100 },
+    jake:    { flights:1500, accommodation:600, food:1200, transport:200, activities:300, shopping:500, nightlife:200, misc:500 },
+    steve:   { flights:1500, accommodation:600, food:600, transport:150, activities:100, shopping:150, nightlife:800, misc:100 },
+    conner:  { flights:1500, accommodation:600, food:800, transport:150, activities:100, shopping:200, nightlife:500, misc:150 },
+    boros:   { flights:1500, accommodation:600, food:700, transport:150, activities:50, shopping:200, nightlife:900, misc:900 },
   };
 
   // Live allocations (mutable by sliders)
@@ -4622,8 +4622,8 @@ const LOGISTICS = {
     { date:'2027-01-24', day:'24', month:'Jan',  label:'Departure from KIX',           urgency:'high',     alarm:false, responsible:'All',     description:'Depart from KIX or HND — whichever return flight was booked. KIX: Haruka Express from Tennoji ~50 min. HND: Shinkansen to Tokyo then airport train ~30 min. Allow 3+ hours before departure either way. Tax refund counter: bring all receipts and original packaging.' }
   ],
   groupRules: [
-    { icon:'🍺', rule:'Blackout Pass',       detail:"Everyone gets ONE 'annoyingly drunk' pass for the entire trip. After that, the group can intervene." },
-    { icon:'🗺️', rule:'Navigation',      detail:'Patrick leads navigation. Jake backs up.' },
+    { icon:'🍺', rule:'Blackout pass',     detail:"Everyone gets ONE blackout pass for the entire trip. Use it wisely — after that, the group can and will intervene." },
+    { icon:'🗺️', rule:'Navigation',      detail:"If you're lost or confused, go to Patrick or Jake first — they know the transit system and can route the group. No one is a full-time navigator." },
     { icon:'🗳️', rule:'Decisions',       detail:'Democratic — Patrick and Jake break deadlocks.' },
     { icon:'↔️', rule:'Group splits',    detail:'Expected and encouraged when interests diverge. No pressure to stay together.' },
     { icon:'💴', rule:'Shared expenses', detail:'Split evenly 5 ways. Track via Venmo or Splitwise. No single person bears the burden.' }
@@ -4650,6 +4650,7 @@ const LOGISTICS = {
     { id:'dates',       label:'⭐ Key Dates'   },
     { id:'money',       label:'💴 Money'       },
     { id:'practical',   label:'📱 Practical'   },
+    { id:'packing',     label:'🎒 Packing'     },
     { id:'rules',       label:'📜 Rules'       },
   ];
 
@@ -5095,7 +5096,7 @@ const LOGISTICS = {
       { key:'Visa',         val:'Not required for US citizens visiting Japan (up to 90 days)' },
       { key:'Insurance',    val:'Recommended — research and book alongside flights' },
       { key:'Allergies',    val:'None — no dietary restrictions for any member' },
-      { key:'Fitness note', val:'High-walking days: Day 2 (~6.2mi), Day 3 (~5.5mi), Day 11 (~6mi). Use rail/bus to break up long days.' },
+      { key:'Walking note', val:'Some days involve 5–6+ miles. Use rail or bus to break up longer days and build in rest time.' },
       { key:'Tax refund',   val:'Keep all receipts and original packaging. Tax refund counter at KIX before departure.' },
     ].forEach(r => {
       const row = document.createElement('div');
@@ -5122,6 +5123,42 @@ const LOGISTICS = {
     emWrap.appendChild(emGrid);
     sec.appendChild(emWrap);
 
+    return sec;
+  }
+
+  // ── PACKING LIST ──
+  function buildPacking() {
+    const sec = makeSection('packing');
+
+    const PACKING = [
+      { cat:'📋 Documents',   items:['Passport (valid)', 'Flight confirmations (screenshot offline)', 'Travel insurance card', 'Emergency numbers (screenshotted)', 'Credit/debit cards', 'Small amount of USD to exchange on arrival'] },
+      { cat:'👕 Clothing',    items:['Thermal base layers (Jan is cold)', 'Warm mid-layer (fleece or down jacket)', 'Waterproof outer layer', '7–8 days of clothes (laundromat mid-trip)', 'Comfortable walking shoes — broken in', 'Dress shoes / smart-casual for bars + cafes', 'Warm hat and gloves'] },
+      { cat:'💊 Health',      items:['Any personal medications (full trip supply)', 'Ibuprofen / pain relief', 'Motion sickness tablets (for Shinkansen if needed)', 'Blister plasters (high-walking days)', 'Hand sanitiser', 'Lip balm (winter air is dry)'] },
+      { cat:'🔌 Tech',        items:['Phone + charger', 'Portable battery pack', 'Universal adapter (Japan uses Type A — same as US)', 'Earbuds / headphones', 'Camera (optional)', 'eSIM activated before departure', 'Modded 3DS + charger (flight entertainment)'] },
+      { cat:'🎒 Day Bag',     items:['Small backpack or tote for daily use', 'Reusable water bottle (vending machines everywhere if you forget)', 'Umbrella or packable rain layer', 'Coin purse (Japan uses a lot of coins)', 'Tote bag for shopping haul overflow'] },
+      { cat:'💴 Money',       items:['Suica IC card (get at HND on arrival)', '¥10,000–20,000 yen cash on hand at all times', 'ATM card confirmed to work abroad (test before leaving)', 'Splitwise or Venmo set up for group expenses'] },
+    ];
+
+    const wrap = document.createElement('div');
+    wrap.appendChild(sectionHeader('Packing List'));
+    wrap.style.marginTop = '20px';
+
+    const cards = document.createElement('div');
+    cards.className = 'tip-cards';
+    PACKING.forEach(section => {
+      const card = document.createElement('div');
+      card.className = 'tip-card';
+      card.innerHTML = `
+        <div>
+          <div class="tip-title" style="margin-bottom:8px">${section.cat}</div>
+          <ul style="margin:0;padding-left:16px;display:flex;flex-direction:column;gap:4px">
+            ${section.items.map(i => `<li style="font-size:12px;color:var(--muted);line-height:1.4">${i}</li>`).join('')}
+          </ul>
+        </div>`;
+      cards.appendChild(card);
+    });
+    wrap.appendChild(cards);
+    sec.appendChild(wrap);
     return sec;
   }
 
@@ -5167,6 +5204,7 @@ const LOGISTICS = {
     contentEl.appendChild(buildDates());
     contentEl.appendChild(buildMoney());
     contentEl.appendChild(buildPractical());
+    contentEl.appendChild(buildPacking());
     contentEl.appendChild(buildRules());
 
     // Trigger fade-ins

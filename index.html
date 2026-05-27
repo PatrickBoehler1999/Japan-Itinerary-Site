@@ -953,6 +953,7 @@
       transition: box-shadow 0.15s;
     }
     .acts-card:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+    .acts-card-ai { background: #eeecea; border-color: #d4d0cb; }
     .acts-card-body { padding: 13px 14px; }
     .acts-card-top {
       display: flex; align-items: flex-start;
@@ -1130,6 +1131,8 @@
     }
     .activity-row:last-child { border-bottom: none; }
     .activity-row:hover { background: var(--paper); }
+    .activity-row-ai { background: #eeecea; }
+    .activity-row-ai:hover { background: #e6e3e0; }
     .act-row-body { min-width: 0; }
     .act-row-top {
       display: flex; align-items: flex-start;
@@ -2506,11 +2509,11 @@
 
 <!-- ============================================================
      INLINE CONFIG (paste japan-trip-config.js content here,
-     or load via <script src="japan-trip-config.js">)
+     or load via )
 ============================================================ -->
 <script>
 // ─── INLINE SITE_CONFIG ───────────────────────────────────────
-// In production: replace this block with <script src="japan-trip-config.js">
+// In production: replace this block with 
 const SITE_CONFIG = {
   trip: {
     title:    'Japan 2027',
@@ -2579,7 +2582,7 @@ const SITE_CONFIG = {
   getCityById(id)   { return this.cities.find(c => c.id === id) || null; },
   getCrewById(id)   { return this.crew.find(m => m.id === id) || null; },
   getCityColor(id)  { const c = this.getCityById(id); return c ? c.color : '#0a0a0a'; },
-  getCrewColor(id)  { const m = this.getCrewById(id); return m ? m.color : '#0a0a0a'; },
+  getCrewColor(id)  { if (id === 'ai') return '#a0a09a'; const m = this.getCrewById(id); return m ? m.color : '#0a0a0a'; },
   toYen(usd)        { return Math.round(usd * this.budget.fxRate); },
   toUSD(yen)        { return Math.round(yen / this.budget.fxRate); }
 };
@@ -2997,6 +3000,80 @@ const TRIP_DATA = {
     {id:'higashiyama-district',person:'jake',city:'kyoto',category:'nature',type:'Historic District',name:'Higashiyama District',address:'Higashiyama, Kyoto',status:'confirmed',priority:'pending',estimatedCost:0,estimatedDuration:'2–3 hours',bookingRequired:false,dayAssigned:12,groupActivity:true,description:`Kyoto's most preserved historic district. Stone-paved lanes of Ninenzaka and Sannenzaka wind through traditional shops, matcha cafes, and craft stores. Leads from Kiyomizudera down through Yasaka Pagoda to Gion.`,mapsQuery:'Higashiyama district Ninenzaka Kyoto',notes:`Start at Kiyomizudera and walk down toward Yasaka Pagoda. Best in late afternoon.`,url:null},
     {id:'yasaka-pagoda',person:'jake',city:'kyoto',category:'temple',type:'Pagoda',name:'Yasaka Pagoda',address:'407 Yasaka Kitamachi, Higashiyama, Kyoto',status:'confirmed',priority:'pending',estimatedCost:0,estimatedDuration:'15 mins',bookingRequired:false,dayAssigned:12,groupActivity:true,description:`A 46-meter five-story pagoda dating to 592 AD — the last remaining structure of the ancient Hokanji temple. One of Kyoto's most iconic silhouettes, particularly striking at dusk.`,mapsQuery:'Yasaka Pagoda Hokanji Higashiyama Kyoto',notes:`Free to view. Best photo spot: looking up the stone lane from below.`,url:null},
     {id:'kiyomizudera-temple',person:'jake',city:'kyoto',category:'temple',type:'Temple',name:'Kiyomizudera',address:'1-294 Kiyomizu, Higashiyama, Kyoto',status:'confirmed',priority:'pending',estimatedCost:400,estimatedDuration:'1–2 hours',bookingRequired:false,dayAssigned:12,groupActivity:true,description:`One of Japan's most celebrated temples, founded in 780 AD and rebuilt in 1633 without a single nail. The main hall extends over a hillside on a vast wooden stage with commanding views over Kyoto.`,mapsQuery:'Kiyomizudera Temple Kyoto Japan',notes:`¥400 entry. Busy but magnificent. Go in late afternoon for golden-hour views.`,url:null},
+// ── AI SUGGESTED ──
+    // Added based on crew interests and gaps in current planning.
+    // Person field set to 'ai' — filter by Who → AI to browse these.
+
+    // TOKYO — gaps: Conner (jazz/whiskey), Boros/Steve (late night specific), Patrick (Super Potato/Mandarake), group (daytime street food)
+    {id:'super-potato',person:'ai',city:'tokyo',category:'arcade',type:'Retro Game Store',name:'Super Potato',address:'1-11-2 Sotokanda, Chiyoda, Tokyo',status:'researching',priority:'pending',estimatedCost:5000,estimatedDuration:'1–2 hours',bookingRequired:false,dayAssigned:5,groupActivity:false,description:`Five floors of retro gaming inside a Akihabara building — Famicom, Super Famicom, PC Engine, Mega Drive, arcade boards, handhelds, and accessories going back to the 70s. Glass cases full of graded cartridges. The neon signs and low ceilings make it feel genuinely nostalgic. Patrick and Jake will lose track of time here.`,mapsQuery:'Super Potato Akihabara Tokyo',notes:`Located above a pachinko parlour on the main Akihabara strip. Go with a budget in mind — prices are fair but the selection is deep.`,url:null},
+
+    {id:'mandarake-akihabara',person:'ai',city:'tokyo',category:'shopping',type:'Anime & Manga Store',name:'Mandarake Complex',address:'3-11-12 Sotokanda, Chiyoda, Tokyo',status:'researching',priority:'pending',estimatedCost:5000,estimatedDuration:'1–2 hours',bookingRequired:false,dayAssigned:5,groupActivity:false,description:`Eight floors dedicated to second-hand manga, anime figures, doujinshi, cosplay, and vintage merch. Serious collectors treat this as a pilgrimage. The figure selection alone justifies the trip — pre-owned items at a fraction of retail, some rare and discontinued. Patrick and Jake's primary collecting destination in Akihabara.`,mapsQuery:'Mandarake Complex Akihabara Tokyo',notes:`Different floors specialize in different categories. Top floor has the rarest items. Bags must be checked at the entrance.`,url:null},
+
+    {id:'omoide-yokocho',person:'ai',city:'tokyo',category:'bar',type:'Alley Bar District',name:'Omoide Yokocho',address:'1-2-11 Nishishinjuku, Shinjuku, Tokyo',status:'researching',priority:'pending',estimatedCost:2500,estimatedDuration:'1–2 hours',bookingRequired:false,dayAssigned:3,groupActivity:true,description:`Tiny, smoke-filled alleyway tucked behind Shinjuku Station West Exit — one of the few surviving post-war black market lanes. Narrow enough that the plastic stools of opposite restaurants nearly touch. Yakitori grills, cold Sapporo, salarymen and tourists shoulder to shoulder. The grease and smoke are part of the experience. Perfect before or after Golden Gai.`,mapsQuery:'Omoide Yokocho Memory Lane Shinjuku Tokyo',notes:`Goes by "Memory Lane" in English. Most stalls fit 6–8 people. Best visited after 8pm when the smoke clouds fully settle.`,url:null},
+
+    {id:'disk-union-shinjuku',person:'ai',city:'tokyo',category:'shopping',type:'Vinyl Record Store',name:'Disk Union Shinjuku',address:'3-31-4 Shinjuku, Shinjuku, Tokyo',status:'researching',priority:'pending',estimatedCost:4000,estimatedDuration:'1–2 hours',bookingRequired:false,dayAssigned:6,groupActivity:false,description:`The flagship location of Japan's best independent record chain. Multiple floors split by genre — jazz, city-pop, rock, electronic, Japanese indie. Unmatched for rare domestic pressings and OBI-strip editions that only exist in Japan. If Patrick isn't maxing out his vinyl budget here, he's showing restraint.`,mapsQuery:'Disk Union Shinjuku Tokyo records',notes:`Also has a Shimokitazawa location (same day works). The Shinjuku store has the deepest stock for most genres.`,url:null},
+
+    {id:'kabukicho-bar-hop',person:'ai',city:'tokyo',category:'bar',type:'Nightlife District',name:'Kabukicho Bar Hop',address:'Kabukicho, Shinjuku, Tokyo',status:'researching',priority:'pending',estimatedCost:3000,estimatedDuration:'3–5 hours',bookingRequired:false,dayAssigned:3,groupActivity:false,description:`Tokyo's most concentrated nightlife district — the area around the Kabukicho Tower is packed with multi-floor bar buildings, karaoke complexes, and clubs running until dawn. Steve and Boros can break off here after the group wraps for the night and find something open at any hour. Robot Restaurant is nearby if they want spectacle.`,mapsQuery:'Kabukicho nightlife Shinjuku Tokyo',notes:`Best explored freely. Steve will find his footing here. The main street (Kuyakusho-dori) has the highest density of options.`,url:null},
+
+    {id:'jazz-bar-shinjuku',person:'ai',city:'tokyo',category:'bar',type:'Jazz Bar',name:'Jazz Bar DUG',address:'3-17-12 Shinjuku, Shinjuku, Tokyo',status:'researching',priority:'pending',estimatedCost:2000,estimatedDuration:'2–3 hours',bookingRequired:false,dayAssigned:6,groupActivity:false,description:`One of Tokyo's oldest surviving jazz bars, open since 1964. Dark, intimate, and serious about the music — vinyl records played on real equipment, whisky selection carefully curated. Exactly the kind of quiet, authentic Tokyo experience Conner is here for. Closes relatively early compared to nightlife bars but perfect for an evening wind-down.`,mapsQuery:'Jazz Bar DUG Shinjuku Tokyo',notes:`Conner's kind of place. Cover charge typically ¥500–800. Whisky list is strong.`,url:null},
+
+    {id:'ameya-yokocho',person:'ai',city:'tokyo',category:'food',type:'Street Market',name:'Ameya-Yokocho Market',address:'4-chome Ueno, Taito, Tokyo',status:'researching',priority:'pending',estimatedCost:2000,estimatedDuration:'1–2 hours',bookingRequired:false,dayAssigned:2,groupActivity:true,description:`A dense 500-meter covered market running under the JR tracks between Ueno and Okachimachi stations. Hundreds of stalls selling dried seafood, nuts, street food, cheap clothing, and trinkets. Loud, busy, and great vlogging material. The atmosphere is chaotic in the best way — Jake will have the camera out constantly.`,mapsQuery:'Ameya-Yokocho market Ueno Tokyo',notes:`Right next to Ueno station. Pairs well with Ueno Park. Cheaper than tourist-facing markets.`,url:null},
+
+    {id:'shin-okubo-koreatown',person:'ai',city:'tokyo',category:'food',type:'Neighbourhood',name:'Shin-Okubo Korea Town',address:'Shin-Okubo, Shinjuku, Tokyo',status:'researching',priority:'pending',estimatedCost:2000,estimatedDuration:'1–2 hours',bookingRequired:false,dayAssigned:null,groupActivity:true,description:`Tokyo's Korea Town — one stop from Shinjuku on the Yamanote Line. Dense with Korean BBQ, fried chicken, tteokbokki street stalls, K-pop merchandise shops, and bubble tea. Good midday food crawl energy and close enough to Shinjuku to fold into almost any day. Wiggle Wiggle also has a presence here.`,mapsQuery:'Shin-Okubo Korea Town Tokyo',notes:`Flex option — easy to add to a Shinjuku day. Great for Jake's vlog.`,url:null},
+
+    // KYOTO — gaps: nightlife (Steve/Boros), group evening activity, Conner coffee
+    {id:'kyoto-jazz-bar',person:'ai',city:'kyoto',category:'bar',type:'Jazz Bar',name:'Bar Isn\'t It',address:'Nakagyo, Kyoto',status:'researching',priority:'pending',estimatedCost:2000,estimatedDuration:'2–3 hours',bookingRequired:false,dayAssigned:null,groupActivity:false,description:`One of Kyoto's most beloved jazz bars, tucked into the Nakagyo district near the bar streets. The music is taken seriously — proper bebop and hard bop on vinyl, knowledgeable staff, and a whisky list that Conner will appreciate. Small, intimate, and far from touristy. Exactly the kind of discovery that makes a trip memorable.`,mapsQuery:'Bar Isn\'t It jazz Kyoto',notes:`Conner's highlight in Kyoto. Hard to find without a map — look it up before heading out.`,url:null},
+
+    {id:'philosopher-path',person:'ai',city:'kyoto',category:'nature',type:'Scenic Walk',name:"Philosopher's Path",address:'Sakyo, Kyoto',status:'researching',priority:'pending',estimatedCost:0,estimatedDuration:'45 mins',bookingRequired:false,dayAssigned:12,groupActivity:true,description:`A 2km stone path running alongside a cherry-tree-lined canal between Nanzenji and Ginkakuji temples. Named after philosopher Nishida Kitaro who reportedly walked it daily. In January the bare trees have a stark, quiet beauty and the path is almost empty compared to spring. Connects several minor temples worth ducking into.`,mapsQuery:"Philosopher's Path Kyoto canal walk",notes:`Free. Runs along the Shishigatani Canal in eastern Kyoto. Easy to fold into the Higashiyama day.`,url:null},
+
+    {id:'gion-at-night',person:'ai',city:'kyoto',category:'nature',type:'Evening Walk',name:'Gion at Night',address:'Gion, Higashiyama, Kyoto',status:'researching',priority:'pending',estimatedCost:500,estimatedDuration:'1–2 hours',bookingRequired:false,dayAssigned:12,groupActivity:true,description:`Kyoto's famous geisha district is completely transformed after dark. The stone-lantern-lit streets of Hanamikoji and Shinbashi-dori are quieter than daytime, the ochaya (teahouses) glow amber, and the occasional maiko in full dress moves quickly between appointments. The most atmospheric evening walk in Japan. Free to wander.`,mapsQuery:'Gion district at night Kyoto Japan',notes:`Best between 7–9pm. No photography rules on some streets — respect signage. Pairs with Pontocho for dinner.`,url:null},
+
+    {id:'wife-and-husband-coffee',person:'ai',city:'kyoto',category:'cafe',type:'Specialty Coffee',name:'Wife & Husband Coffee',address:'Kamigamo, Kita, Kyoto',status:'researching',priority:'pending',estimatedCost:700,estimatedDuration:'45 mins',bookingRequired:false,dayAssigned:11,groupActivity:false,description:`A tiny, deeply charming specialty coffee shop in northern Kyoto run by a married couple. Hand-drip pourover from a focused selection of origins, served in a converted house with mismatched vintage furniture and a garden. One of the most photographed cafes in Kyoto for good reason. Worth the short trip north.`,mapsQuery:'Wife and Husband Coffee Kyoto',notes:`Conner's Kyoto coffee pick. A little out of the way but worth it on a flex/rest day.`,url:null},
+
+    // OSAKA — gaps: Conner (food/whisky), Steve/Boros (nightlife specific), group
+    {id:'kuromon-market',person:'ai',city:'osaka',category:'food',type:'Market',name:'Kuromon Ichiba Market',address:'2-4-1 Nipponbashi, Naniwa, Osaka',status:'researching',priority:'pending',estimatedCost:3000,estimatedDuration:'1–2 hours',bookingRequired:false,dayAssigned:14,groupActivity:true,description:`Osaka's premier fresh food market, nicknamed "Osaka's Kitchen." 180+ stalls selling fresh seafood, wagyu skewers, whole king crab, sea urchin, and Osaka street food classics. Walk and eat — every vendor is set up for it. Jake will have a field day here, Conner will be in his element, and even Steve will find something to eat.`,mapsQuery:'Kuromon Ichiba Market Osaka',notes:`Open from around 9am. Most vendors welcome walk-up eating. Budget ¥2,000–3,000 for a proper crawl.`,url:null},
+
+    {id:'amerikamura',person:'ai',city:'osaka',category:'shopping',type:'Neighbourhood',name:'Amerika-Mura',address:'Amerika-Mura, Chuo, Osaka',status:'researching',priority:'pending',estimatedCost:2000,estimatedDuration:'1–2 hours',bookingRequired:false,dayAssigned:13,groupActivity:true,description:`Osaka's version of Harajuku — a dense grid of vintage clothing shops, streetwear, record stores, and small cafes around Triangle Park. More approachable and less crowded than Tokyo's equivalent. Great for thrifting, people-watching, and finding Osaka-specific streetwear. Good afternoon activity before Dotonbori.`,mapsQuery:'Amerika-Mura Osaka Triangle Park',notes:`5 min walk from Shinsaibashi station. Pairs naturally with a Dotonbori evening.`,url:null},
+
+    {id:'whiskyholic-osaka',person:'ai',city:'osaka',category:'bar',type:'Whisky Bar',name:'Whiskyholic',address:'Namba, Osaka',status:'researching',priority:'pending',estimatedCost:3000,estimatedDuration:'2–3 hours',bookingRequired:false,dayAssigned:14,groupActivity:false,description:`A serious whisky bar in the Namba area with an extensive Japanese whisky list — Nikka, Suntory, Yamazaki, Hakushu, plus rarer single cask expressions. The kind of bar Conner comes to Japan specifically to find. Relaxed atmosphere, knowledgeable staff, no pressure. A civilised alternative to the louder Dotonbori scene.`,mapsQuery:'Whiskyholic whisky bar Namba Osaka',notes:`Conner's Osaka highlight. Check current location before going — small bars sometimes move.`,url:null},
+
+    {id:'namba-nightlife',person:'ai',city:'osaka',category:'bar',type:'Nightlife District',name:'Namba & Shinsaibashi Nightlife',address:'Namba, Chuo, Osaka',status:'researching',priority:'pending',estimatedCost:3000,estimatedDuration:'3–5 hours',bookingRequired:false,dayAssigned:13,groupActivity:false,description:`Osaka's nightlife is concentrated in and around Namba and Shinsaibashi. Dense with bars, clubs, izakayas, and late-night ramen spots — all within walking distance of the Airbnb. Steve and Boros can operate freely here every night in Osaka without needing transit. The energy runs later than Tokyo and the people are friendlier.`,mapsQuery:'Namba nightlife district Osaka',notes:`Steve and Boros's home territory for all three Osaka nights. Everything is walkable from a Namba/Dotonbori Airbnb.`,url:null},
+    // ── BATCH 2 AI SUGGESTIONS ──
+
+    // KYOTO — Entertainment (0), extra cafes, food, bars for Steve/Boros nights
+    {id:'kyoto-samurai-ninja-museum',person:'ai',city:'kyoto',category:'entertainment',type:'Museum & Experience',name:'Samurai & Ninja Museum Kyoto',address:'Nakagyo, Kyoto',status:'researching',priority:'pending',estimatedCost:2000,estimatedDuration:'1–2 hours',bookingRequired:false,dayAssigned:11,groupActivity:true,description:`Interactive museum where you can wear samurai armour, handle real katana, and take a guided tour through the history of the samurai class. Ninja shuriken throwing and costume experiences available. Legitimately fun and informative — not as cheesy as it sounds. Great group activity on the flex day.`,mapsQuery:'Samurai Ninja Museum Kyoto',notes:`English-speaking guides available. Good rainy day option on Day 11 flex.`,url:null},
+
+    {id:'kyoto-ramen-alley',person:'ai',city:'kyoto',category:'food',type:'Restaurant District',name:'Kyoto Ramen Koji',address:'Kyoto Station 10F, Shimogyo, Kyoto',status:'researching',priority:'pending',estimatedCost:1500,estimatedDuration:'1 hour',bookingRequired:false,dayAssigned:8,groupActivity:true,description:`Eight ramen shops on the 10th floor of Kyoto Station Tower, each representing a different regional style — Kyoto-style chicken broth, Sapporo miso, Hakata tonkotsu. Perfect first meal in Kyoto after arriving from Tokyo on the Shinkansen. Convenient, high quality, and covers every preference including Steve's picky palate.`,mapsQuery:'Kyoto Ramen Koji Kyoto Station',notes:`Right in Kyoto Station — ideal for Day 8 arrival before dropping bags or heading to Airbnb.`,url:null},
+
+    {id:'kyoto-craft-beer',person:'ai',city:'kyoto',category:'bar',type:'Craft Beer Bar',name:'Bungalow Kyoto',address:'Nakagyo, Kyoto',status:'researching',priority:'pending',estimatedCost:2500,estimatedDuration:'2–3 hours',bookingRequired:false,dayAssigned:null,groupActivity:true,description:`One of Kyoto's best craft beer bars — rotating taps of Japanese and international craft beers in a relaxed, modern space. More approachable than the jazz bars for the whole group. Good for an early evening wind-down that works for everyone from Steve to Conner. Often has a solid snack menu too.`,mapsQuery:'Bungalow craft beer bar Kyoto',notes:`Flex night option in Kyoto. Good middle ground between jazz bars and nightlife venues.`,url:null},
+
+    {id:'nishiki-tenmangu',person:'ai',city:'kyoto',category:'temple',type:'Shrine',name:'Nishiki Tenmangu Shrine',address:'Nishikikoji, Nakagyo, Kyoto',status:'researching',priority:'pending',estimatedCost:0,estimatedDuration:'20 mins',bookingRequired:false,dayAssigned:8,groupActivity:true,description:`A small Shinto shrine hidden at the end of Nishiki Market, dedicated to the god of learning. Tiny but atmospheric — red lanterns, stone foxes, incense smoke mixing with the market smells behind you. One of those finds that makes a trip feel real. Free entry, five minutes from the market stalls.`,mapsQuery:'Nishiki Tenmangu Shrine Kyoto',notes:`At the far east end of Nishiki Market — easy to add on at the end of a market visit.`,url:null},
+
+    {id:'kyoto-matcha-experience',person:'ai',city:'kyoto',category:'cafe',type:'Tea Ceremony & Cafe',name:'Ippodo Tea Kyoto',address:'Teramachi, Nakagyo, Kyoto',status:'researching',priority:'pending',estimatedCost:1200,estimatedDuration:'45 mins',bookingRequired:false,dayAssigned:null,groupActivity:true,description:`Ippodo is one of Japan's most respected tea merchants, founded in 1717. Their Kyoto cafe serves proper matcha — whisked at the counter, served with a seasonal wagashi sweet. The difference between this and tourist matcha ice cream is enormous. Conner will appreciate the craft; everyone else will appreciate how good real matcha actually tastes.`,mapsQuery:'Ippodo Tea Kyoto cafe',notes:`On Teramachi shopping street. No reservation needed for cafe seating. Take-home tea tins make excellent gifts.`,url:null},
+
+    // OSAKA — Temples (0), gaming/entertainment, Boros specific, Steve specific
+    {id:'osaka-castle',person:'ai',city:'osaka',category:'temple',type:'Castle',name:'Osaka Castle',address:'1-1 Osakajo, Chuo, Osaka',status:'researching',priority:'pending',estimatedCost:600,estimatedDuration:'2 hours',bookingRequired:false,dayAssigned:14,groupActivity:true,description:`One of Japan's most iconic landmarks — a five-story castle keep rebuilt in 1931 on the original 1583 foundations, surrounded by enormous stone walls and a moat. The museum inside covers the rise of Toyotomi Hideyoshi and the battles that shaped modern Japan. January means bare trees and crisp air with almost no queues. The grounds are free; the keep is ¥600.`,mapsQuery:'Osaka Castle Japan',notes:`On Day 14. Grounds are huge and free to walk. Allow 1.5–2 hours including the museum. Good halfway point between Kuromon Market and Den Den Town.`,url:null},
+
+    {id:'den-den-town',person:'ai',city:'osaka',category:'arcade',type:'Electronics & Gaming District',name:'Den Den Town',address:'Nipponbashi, Naniwa, Osaka',status:'researching',priority:'pending',estimatedCost:3000,estimatedDuration:'2–3 hours',bookingRequired:false,dayAssigned:14,groupActivity:false,description:`Osaka's version of Akihabara — a multi-block stretch of electronics shops, retro game stores, anime merchandise, and maid cafes. Smaller and less overwhelming than Akihabara but has its own unique finds including Osaka-exclusive merchandise and a slightly grittier character. Patrick and Jake will want dedicated time here.`,mapsQuery:'Den Den Town Nipponbashi Osaka',notes:`On the same day as Osaka Castle and Kuromon Market — all walkable in one day. South end has better retro game shops.`,url:null},
+
+    {id:'spa-world-osaka',person:'ai',city:'osaka',category:'entertainment',type:'Onsen Complex',name:'Spa World',address:'3-4-24 Ebisuhigashi, Naniwa, Osaka',status:'researching',priority:'pending',estimatedCost:1500,estimatedDuration:'3–4 hours',bookingRequired:false,dayAssigned:14,groupActivity:false,description:`Enormous multi-floor onsen complex in Shinsekai with themed bath areas from around the world — Roman baths, Finnish sauna, Turkish hammam, Japanese rotenburo. Open 24 hours. Steve and Boros can treat this as a late-night wind-down after bars; the rest of the group can use it as a mid-afternoon recovery. ¥1,500 entry.`,mapsQuery:'Spa World Osaka onsen',notes:`Steve and Boros: great post-bar option at 2–3am. The rest of the group: solid afternoon activity on Day 14.`,url:null},
+
+    {id:'shinsekai-osaka',person:'ai',city:'osaka',category:'food',type:'Retro District',name:'Shinsekai',address:'Shinsekai, Naniwa, Osaka',status:'researching',priority:'pending',estimatedCost:2000,estimatedDuration:'1–2 hours',bookingRequired:false,dayAssigned:13,groupActivity:true,description:`One of Osaka's most distinctive old-town districts, built in 1912 modelled on Paris and New York. Narrow streets packed with kushikatsu restaurants, old-school pachinko parlours, and vintage signage surrounding the Tsutenkaku Tower. The antidote to the tourist gloss of Dotonbori — this is Osaka the way it actually was. Kushikatsu (deep-fried skewers) originated here.`,mapsQuery:'Shinsekai Tsutenkaku Tower Osaka',notes:`Adjacent to Spa World. Must-try: kushikatsu. House rule is no double-dipping the sauce — the restaurants enforce it.`,url:null},
+
+    {id:'tsutenkaku-tower',person:'ai',city:'osaka',category:'landmark',type:'Observation Tower',name:'Tsutenkaku Tower',address:'1-18-6 Ebisuhigashi, Naniwa, Osaka',status:'researching',priority:'pending',estimatedCost:1000,estimatedDuration:'45 mins',bookingRequired:false,dayAssigned:13,groupActivity:true,description:`The retro symbol of Osaka — a 103m tower in the Shinsekai district, originally built in 1912 and rebuilt in 1956. Less famous than Tokyo Skytree but far more characterful. The observation deck has unobstructed views of southern Osaka and the Shinsekai streets below. A good photo stop before dinner in the neighbourhood.`,mapsQuery:'Tsutenkaku Tower Osaka',notes:`Ticket booth is at street level. The neon at night is great for Jake's vlog.`,url:null},
+
+    // BOROS specific (0 currently)
+    {id:'boros-karaoke-osaka',person:'ai',city:'osaka',category:'entertainment',type:'Karaoke',name:'Joysound Osaka Namba',address:'Namba, Chuo, Osaka',status:'researching',priority:'pending',estimatedCost:2000,estimatedDuration:'2–3 hours',bookingRequired:false,dayAssigned:14,groupActivity:true,description:`Large karaoke chain in the heart of Namba with private rooms for groups, an extensive English-language song library, and all-you-can-drink options. Boros's kind of night — easy, social, loud. A natural group activity for the Osaka leg that doesn't require planning or Japanese skills. Open very late.`,mapsQuery:'Joysound Karaoke Namba Osaka',notes:`Boros pick — easy group activity for Osaka. Book a room on arrival or a few hours ahead. Drinks packages available.`,url:null},
+
+    {id:'boros-teamlab-osaka',person:'ai',city:'osaka',category:'museum',type:'Digital Art Museum',name:'teamLab Botanical Garden Osaka',address:'Naka, Tsurumi, Osaka',status:'researching',priority:'pending',estimatedCost:3200,estimatedDuration:'1–2 hours',bookingRequired:true,dayAssigned:null,groupActivity:true,description:`Nighttime digital art installation in Osaka's Tsurumi Ryokuchi Park — illuminated flowers, projected light patterns through trees, and interactive light floors. A completely different experience to teamLab Borderless in Tokyo. Boros is going to appreciate the spectacle even if he can't explain why. Good group evening activity.`,mapsQuery:'teamLab Botanical Garden Osaka Tsurumi',notes:`Separate from teamLab Borderless in Tokyo. Book tickets at teamlab.art — sells out. Worth it as an Osaka evening activity.`,url:'https://www.teamlab.art/e/botanicalgarden-osaka/'},
+
+    // STEVE specific (only Snoopy Museum currently)
+    {id:'steve-toricafe-kyoto',person:'ai',city:'kyoto',category:'bar',type:'Standing Bar',name:'Tori no Ichi Sake Bar',address:'Fushimi, Kyoto',status:'researching',priority:'pending',estimatedCost:2000,estimatedDuration:'1–2 hours',bookingRequired:false,dayAssigned:9,groupActivity:false,description:`A standing sake bar in the Fushimi sake district — where Steve can finally try Japanese sake the way it should be experienced: poured fresh from local breweries, standing at a counter, no ceremony. The Fushimi area has multiple standing sake bars and sake vending machines. Something Steve will enjoy far more than he expects to.`,mapsQuery:'Fushimi sake bar standing Kyoto',notes:`Steve pick — combine with Fushimi Inari day. Even picky drinkers find something they like in sake country.`,url:null},
+
+    {id:'steve-hoppy-street',person:'ai',city:'tokyo',category:'bar',type:'Standing Bar Alley',name:'Hoppy Street',address:'Asakusa, Taito, Tokyo',status:'researching',priority:'pending',estimatedCost:1500,estimatedDuration:'1–2 hours',bookingRequired:false,dayAssigned:2,groupActivity:true,description:`A narrow alley in Asakusa lined with post-WWII standing bar stalls — plastic stools on the street, cheap Hoppy (a beer-like soft drink mixed with shochu), yakitori and motsu-yaki (offal skewers). Surviving from the 1940s black market era. The most purely Tokyo drinking experience that isn't Golden Gai. Steve will be comfortable here before the group even sits down.`,mapsQuery:'Hoppy Street Asakusa Tokyo',notes:`Right near Sensoji — good pre-dinner drink stop on Day 2 after the temple. Extremely cheap. Drinks from ¥300.`,url:null},
+
+
+
   ]
 };
 if (typeof window !== 'undefined') window.TRIP_DATA = TRIP_DATA;
@@ -3205,7 +3282,7 @@ if (typeof window !== 'undefined') window.TRIP_DATA = TRIP_DATA;
             ? `<span class="act-day-link" data-goto-day="${act.dayAssigned}">Day ${act.dayAssigned}</span>`
             : act.dayAssigned === 'flex' ? '<span class="act-day-link act-day-flex">Flex</span>' : '';
           const noteStr = act.notes ? `<div class="act-row-note">${act.notes}</div>` : '';
-          return `<div class="activity-row">
+          return `<div class="activity-row${act.person === 'ai' ? ' activity-row-ai' : ''}">
             <div class="act-cat-icon">${catEmoji}</div>
             <div class="act-row-body">
               <div class="act-row-top">
@@ -3441,7 +3518,7 @@ if (typeof window !== 'undefined') window.TRIP_DATA = TRIP_DATA;
     const city      = C.getCityById(act.city);
     const member    = C.getCrewById(act.person);
     const cityColor = city   ? city.color   : '#8a8278';
-    const crewColor = member ? member.color : '#8a8278';
+    const crewColor = act.person === 'ai' ? '#a0a09a' : (member ? member.color : '#8a8278');
     const catEmoji  = CAT_EMOJI_A[act.category] || '📍';
 
     const badges = [];
@@ -3465,7 +3542,9 @@ if (typeof window !== 'undefined') window.TRIP_DATA = TRIP_DATA;
       dayChip = `<span class="acts-badge flex-day">Flex day</span>`;
     }
 
-    const crewDot = member
+    const crewDot = act.person === 'ai'
+      ? `<span class="who-dot" style="background:#a0a09a;width:18px;height:18px;font-size:9px" title="AI Suggestion">✨</span>`
+      : member
       ? `<span class="who-dot" style="background:${crewColor};width:18px;height:18px;font-size:9px" title="${member.name}">${CREW_INITIALS[act.person] || act.person[0].toUpperCase()}</span>`
       : '';
 
@@ -3476,7 +3555,7 @@ if (typeof window !== 'undefined') window.TRIP_DATA = TRIP_DATA;
     const noteHTML = act.notes ? `<div class="acts-card-note">${act.notes}</div>` : '';
 
     const card = document.createElement('div');
-    card.className = 'acts-card';
+    card.className = 'acts-card' + (act.person === 'ai' ? ' acts-card-ai' : '');
     card.dataset.id = act.id;
     card.innerHTML = `
       <div class="acts-card-accent" style="background:${cityColor}"></div>
@@ -3611,7 +3690,8 @@ if (typeof window !== 'undefined') window.TRIP_DATA = TRIP_DATA;
       { key:'person', label:'Who', options:[
           { value:'all', label:'Everyone' },
           ...C.crew.filter(m => allActivities.some(a => a.person === m.id))
-            .map(m => ({ value:m.id, label:m.name, dot:m.color, count:allActivities.filter(a=>a.person===m.id).length }))
+            .map(m => ({ value:m.id, label:m.name, dot:m.color, count:allActivities.filter(a=>a.person===m.id).length })),
+          { value:'ai', label:'✨ AI Picks', dot:'#8b5cf6', count:allActivities.filter(a=>a.person==='ai').length },
         ]
       },
       { key:'category', label:'Type', options:[
@@ -5266,6 +5346,39 @@ const LOGISTICS = {
     'gyukatsu-motomura':             [35.6593, 139.6986],
     'snoopy-museum':                 [35.4693, 139.4390],
     'glitch-coffee':                 [35.6955, 139.7630],
+    // AI SUGGESTED — TOKYO
+    'super-potato':               [35.7015, 139.7730],
+    'mandarake-akihabara':        [35.7013, 139.7745],
+    'omoide-yokocho':             [35.6940, 139.6997],
+    'disk-union-shinjuku':        [35.6910, 139.7004],
+    'kabukicho-bar-hop':          [35.6940, 139.7034],
+    'jazz-bar-shinjuku':          [35.6919, 139.7010],
+    'ameya-yokocho':              [35.7086, 139.7747],
+    'shin-okubo-koreatown':       [35.7011, 139.6993],
+    // AI SUGGESTED — KYOTO
+    'kyoto-jazz-bar':             [35.0062, 135.7680],
+    'philosopher-path':           [35.0171, 135.7930],
+    'gion-at-night':              [35.0036, 135.7754],
+    'wife-and-husband-coffee':    [35.0472, 135.7580],
+    'kyoto-samurai-ninja-museum': [35.0107, 135.7680],
+    'kyoto-ramen-alley':          [34.9858, 135.7588],
+    'kyoto-craft-beer':           [35.0080, 135.7660],
+    'nishiki-tenmangu':           [35.0052, 135.7693],
+    'kyoto-matcha-experience':    [35.0063, 135.7650],
+    // AI SUGGESTED — OSAKA
+    'kuromon-market':             [34.6654, 135.5054],
+    'amerikamura':                [34.6716, 135.4996],
+    'whiskyholic-osaka':          [34.6659, 135.5012],
+    'namba-nightlife':            [34.6687, 135.5012],
+    'osaka-castle':               [34.6873, 135.5262],
+    'den-den-town':               [34.6602, 135.5062],
+    'spa-world-osaka':            [34.6519, 135.5061],
+    'shinsekai-osaka':            [34.6522, 135.5063],
+    'tsutenkaku-tower':           [34.6523, 135.5063],
+    'boros-karaoke-osaka':        [34.6687, 135.5013],
+    'boros-teamlab-osaka':        [34.7335, 135.5726],
+    'steve-toricafe-kyoto':       [34.9394, 135.7680],
+    'steve-hoppy-street':         [35.7148, 139.7940],
     // OSAKA
     'silver-ball-planet':            [34.6729, 135.5023],
     'dragon-quest-island':           [34.5201, 134.9154],

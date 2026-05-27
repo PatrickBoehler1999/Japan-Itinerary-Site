@@ -2560,16 +2560,17 @@ const SITE_CONFIG = {
     }
   ],
   crew: [
-    { id:'patrick', name:'Patrick', kanji:'パトリック', emoji:'🎮', color:'#c41e3a', colorName:'deep red',   role:'Trip Organizer',      japanExp:'Veteran (3rd visit)', activityCount:{ total:25, tokyo:19, kyoto:0,  osaka:5,  flex:1 }, tags:['Organizer','Japan Vet','Anime','Gaming','Early Riser'] },
+    { id:'patrick', name:'Patrick', kanji:'パトリック', emoji:'🎵', color:'#c41e3a', colorName:'deep red',   role:'Trip Organizer',      japanExp:'Veteran (3rd visit)', activityCount:{ total:25, tokyo:19, kyoto:0,  osaka:5,  flex:1 }, tags:['Organizer','Japan Vet','Anime','Gaming','Early Riser'] },
     { id:'jake',    name:'Jake',    kanji:'ジェイク',   emoji:'🍜', color:'#3730a3', colorName:'indigo',     role:'Vlogger & Foodie',    japanExp:'First timer',         activityCount:{ total:21, tokyo:5,  kyoto:14, osaka:2,  flex:0 }, tags:['Vlogger','Foodie','Temples','Collecting'] },
     { id:'steve',   name:'Steve',   kanji:'スティーブ', emoji:'🌙', color:'#b45309', colorName:'amber',      role:'Nightlife Lead',      japanExp:'First timer',         activityCount:{ total:1,  tokyo:1,  kyoto:0,  osaka:0,  flex:0 }, tags:['Nightlife','Bars','Night Owl'] },
     { id:'conner',  name:'Conner',  kanji:'コナー',     emoji:'☕', color:'#2d6a4f', colorName:'forest green',role:'Culinary Scout',     japanExp:'First timer',         activityCount:{ total:1,  tokyo:1,  kyoto:0,  osaka:0,  flex:0 }, tags:['Culinary','Coffee','Whiskey'] },
-    { id:'boros',   name:'Boros',   kanji:'ボロス',     emoji:'🍺', color:'#0e7490', colorName:'slate teal', role:'Good Vibes',          japanExp:'First timer',         activityCount:{ total:0,  tokyo:0,  kyoto:0,  osaka:0,  flex:0 }, tags:['Bars','Nightlife','Vibes'] }
+    { id:'boros',   name:'Boros',   kanji:'ボロス',     emoji:'🍺', color:'#0e7490', colorName:'slate teal', role:'Good Vibes',          japanExp:'First timer',         activityCount:{ total:0,  tokyo:0,  kyoto:0,  osaka:0,  flex:0 }, tags:['Bars','Nightlife','Vibes'] },
+    { id:'silva',   name:'Silva',   kanji:'シルバ',     emoji:'🎮', color:'#7c2d8e', colorName:'deep purple', role:'Anime & Gaming',      japanExp:'First timer',         activityCount:{ total:0,  tokyo:0,  kyoto:0,  osaka:0,  flex:0 }, tags:['Anime','Dragon Quest','One Piece','Figure Collecting','Nightlife'], status:'potential' }
   ],
   budget: {
     fxRate: 150, fxRateNote: '¥150 = $1 USD',
     currency: { local:'JPY', home:'USD' },
-    personBudgets: { patrick:5000, jake:5000, steve:4000, conner:4000, boros:5000, groupTotal:23000 }
+    personBudgets: { patrick:5000, jake:5000, steve:4000, conner:4000, boros:5000, silva:3500, groupTotal:26500 }
   },
   theme: {
     fonts: { serif:'Shippori Mincho', sansSerif:'DM Sans, sans-serif' },
@@ -2584,7 +2585,8 @@ const SITE_CONFIG = {
   getCityColor(id)  { const c = this.getCityById(id); return c ? c.color : '#0a0a0a'; },
   getCrewColor(id)  { if (id === 'ai') return '#a0a09a'; const m = this.getCrewById(id); return m ? m.color : '#0a0a0a'; },
   toYen(usd)        { return Math.round(usd * this.budget.fxRate); },
-  toUSD(yen)        { return Math.round(yen / this.budget.fxRate); }
+  toUSD(yen)        { return Math.round(yen / this.budget.fxRate); },
+  confirmedCrew()   { return this.crew.filter(m => !m.status || m.status !== 'potential'); }
 };
 </script>
 
@@ -2680,7 +2682,7 @@ const SITE_CONFIG = {
     const totalActivities = C.crew.reduce((sum, m) => sum + m.activityCount.total, 0);
     const stats = [
       { num: C.trip.dates.durationDays, label: 'Days' },
-      { num: C.crew.length,             label: 'Crew' },
+      { num: C.confirmedCrew().length + '+',             label: 'Crew' },
       { num: C.cities.length,           label: 'Cities' },
       { num: totalActivities,           label: 'Activities' }
     ];
@@ -2811,10 +2813,11 @@ const SITE_CONFIG = {
       const card = document.createElement('div');
       card.className = 'crew-card';
 
+      const isPotential = member.status === 'potential';
       const isVet = member.japanExp.toLowerCase().includes('veteran');
-      const expBg   = isVet ? 'rgba(196,30,58,0.08)' : 'rgba(138,130,120,0.08)';
-      const expColor = isVet ? '#c41e3a' : '#8a8278';
-      const expLabel = isVet ? 'Japan Vet' : 'First Timer';
+      const expBg    = isPotential ? 'rgba(124,45,142,0.1)' : isVet ? 'rgba(196,30,58,0.08)' : 'rgba(138,130,120,0.08)';
+      const expColor = isPotential ? '#7c2d8e' : isVet ? '#c41e3a' : '#8a8278';
+      const expLabel = isPotential ? '⏳ Potential' : isVet ? 'Japan Vet' : 'First Timer';
 
       const pct = maxActivities > 0
         ? Math.round((member.activityCount.total / maxActivities) * 100)
@@ -4071,6 +4074,7 @@ if (typeof window !== 'undefined') window.TRIP_DATA = TRIP_DATA;
     steve:   { flights:1500, accommodation:600, food:600, transport:150, activities:100, shopping:150, nightlife:800, misc:100 },
     conner:  { flights:1500, accommodation:600, food:800, transport:150, activities:100, shopping:200, nightlife:500, misc:150 },
     boros:   { flights:1500, accommodation:600, food:700, transport:150, activities:50, shopping:200, nightlife:900, misc:900 },
+    silva:   { flights:1500, accommodation:600, food:500, transport:150, activities:200, shopping:200, nightlife:200, misc:150 },
   };
 
   // Live allocations (mutable by sliders)
@@ -4082,6 +4086,7 @@ if (typeof window !== 'undefined') window.TRIP_DATA = TRIP_DATA;
   }
 
   function personTotal(personId) {
+    if (!allocations[personId]) return 0;
     return Object.values(allocations[personId]).reduce((s, v) => s + v, 0);
   }
 
@@ -4095,7 +4100,7 @@ if (typeof window !== 'undefined') window.TRIP_DATA = TRIP_DATA;
       <div class="budget-hero-inner">
         <div class="budget-hero-label">Total Group Budget</div>
         <div class="budget-hero-total" id="hero-total">${fmt(groupTotal)}</div>
-        <div class="budget-hero-sub">5 crew · 16 days · 3 cities</div>
+        <div class="budget-hero-sub">5–6 crew · 16 days · 3 cities</div>
         <div class="budget-fx-row">
           <span class="budget-fx-label">Display in:</span>
           <div class="budget-fx-toggle">
@@ -4133,7 +4138,7 @@ if (typeof window !== 'undefined') window.TRIP_DATA = TRIP_DATA;
     const bar = document.getElementById('budget-stats-bar');
     if (!bar) return;
     const groupTotal  = C.budget.personBudgets.groupTotal;
-    const perPerson   = groupTotal / C.crew.length;
+    const perPerson   = groupTotal / C.confirmedCrew().length;
     const itinTotal   = typeof ITINERARY_DATA !== 'undefined'
       ? ITINERARY_DATA.days.reduce((s, d) => s + (d.estimatedCostPerPerson?.usd || 0), 0)
       : 958;
@@ -4171,20 +4176,24 @@ if (typeof window !== 'undefined') window.TRIP_DATA = TRIP_DATA;
   }
 
   function buildPersonCard(member) {
-    const budget = C.budget.personBudgets[member.id];
+    const budget = C.budget.personBudgets[member.id] || 0;
     const alloc  = allocations[member.id];
+    const isPotential = member.status === 'potential';
     const card   = document.createElement('div');
     card.className = 'person-card';
+    if (isPotential) card.style.cssText = 'border: 1.5px dashed #7c2d8e; opacity:0.85;';
     card.id = `pcard-${member.id}`;
 
     // Header
     const header = document.createElement('div');
     header.className = 'person-card-header';
+    const potentialTag = isPotential ? `<span style="display:inline-block;font-size:10px;font-weight:600;color:#7c2d8e;background:rgba(124,45,142,0.1);padding:2px 7px;border-radius:4px;margin-top:3px">⏳ Potential Member</span>` : '';
     header.innerHTML = `
       <div class="person-avatar" style="background:${member.color}20">${member.emoji}</div>
       <div class="person-card-info">
         <div class="person-card-name">${member.name}</div>
         <div class="person-card-role">${member.role}</div>
+        ${potentialTag}
       </div>
       <div class="person-card-right">
         <div class="person-budget-total" id="ptotal-${member.id}">${fmt(personTotal(member.id))}</div>
@@ -4692,14 +4701,22 @@ const LOGISTICS = {
     ]}
   ],
   criticalDates: [
-    { date:'2026-08-01', day:'1',  month:'Aug',  label:'Flight Booking Opens',         urgency:'high',     alarm:false, responsible:'All',     description:'Target Aug–Sep 2026 for best prices CLT → HND.' },
-    { date:'2026-12-10', day:'10', month:'Dec',  label:'⭐ Ghibli Museum Tickets Open', urgency:'critical', alarm:true,  responsible:'Patrick', description:'10:00 AM JST via l-tike.com. Sells out in minutes. Have site loaded.', url:'https://l-tike.com' },
-    { date:'2026-12-10', day:'10', month:'Dec',  label:'⭐ Kirby Cafe Opens',           urgency:'critical', alarm:true,  responsible:'Patrick', description:'6:00 PM JST — completely separate site from Ghibli. Set a second alarm.' },
-    { date:'2027-01-09', day:'9',  month:'Jan',  label:'Departure Day',                urgency:'high',     alarm:false, responsible:'All',     description:'Depart Charlotte (CLT). Arrive Tokyo Jan 9 local time. Top up Suica at HND immediately.' },
-    { date:'2027-01-14', day:'14', month:'Jan',  label:'Send Luggage to Kyoto',        urgency:'medium',   alarm:false, responsible:'All',     description:'Drop luggage with Yamato Transport the evening before transit day.' },
-    { date:'2027-01-15', day:'15', month:'Jan',  label:'Tokyo → Kyoto Transit',        urgency:'medium',   alarm:false, responsible:'All',     description:'Check out Tokyo Airbnb. Shinkansen to Kyoto ~2h 15min. Travel light — bags already forwarded.' },
-    { date:'2027-01-20', day:'20', month:'Jan',  label:'Kyoto → Osaka Transit',        urgency:'medium',   alarm:false, responsible:'All',     description:'Check out Kyoto Airbnb. Shinkansen or JR Kyoto Line to Osaka (~15–30 min).' },
-    { date:'2027-01-24', day:'24', month:'Jan',  label:'Departure from KIX',           urgency:'high',     alarm:false, responsible:'All',     description:'Depart from KIX or HND — whichever return flight was booked. KIX: Haruka Express from Tennoji ~50 min. HND: Shinkansen to Tokyo then airport train ~30 min. Allow 3+ hours before departure either way. Tax refund counter: bring all receipts and original packaging.' }
+    { date:'2026-07-01', day:'1',  month:'Jul',  label:'SmartEX Registration',            urgency:'high',     alarm:false, responsible:'All',     description:'Register SmartEX app now — required to book Shinkansen tickets and requires a foreign credit card. Do not wait until booking time.' },
+    { date:'2026-07-31', day:'31', month:'Jul',  label:'Activity Wishlist Deadline',      urgency:'high',     alarm:false, responsible:'All',     description:'Everyone submits their must-do and want-to-do activities before Airbnbs are booked. Helps Patrick choose accommodation locations that actually work for the planned activities.' },
+    { date:'2026-08-01', day:'1',  month:'Aug',  label:'Flight Search Begins',            urgency:'high',     alarm:false, responsible:'All',     description:'Target Aug–Sep 2026 for best prices CLT → HND. Everyone monitors and books independently. Coordinate to arrive same day if possible.' },
+    { date:'2026-09-01', day:'1',  month:'Sep',  label:'Flights Booked + Airbnb Search Begins', urgency:'high', alarm:false, responsible:'All', description:'Aim to have flights confirmed by end of September — share confirmations in group chat. Airbnb search starts immediately after flights are booked. All 3 cities: Tokyo (Jan 9–15), Kyoto (Jan 16–20), Osaka (Jan 20–23). Needs central location + storage for 5–6 suitcases.' },
+    { date:'2026-10-01', day:'1',  month:'Oct',  label:'Airbnbs Booked',                  urgency:'high',     alarm:false, responsible:'All', description:'All 3 Airbnbs confirmed. Share addresses with the group immediately — needed for Yamato luggage forwarding setup and SmartEX booking.' },
+    { date:'2026-10-15', day:'15', month:'Oct',  label:'Shinkansen Tickets',              urgency:'high',     alarm:false, responsible:'Patrick', description:'Book all Shinkansen tickets via SmartEX once Airbnb addresses are confirmed. Tokyo → Kyoto and Kyoto → Osaka.' },
+    { date:'2026-11-01', day:'1',  month:'Nov',  label:'Pre-Book Attractions',            urgency:'high',     alarm:false, responsible:'Patrick', description:'Book Eorzea Cafe Akihabara, Eorzea Cafe Dotonbori, Snoopy Museum (Steve), TeamLab Borderless (if going), Tokyo Mystery Circus. Also purchase eSIMs.' },
+    { date:'2026-11-15', day:'15', month:'Nov',  label:'Visit Japan Web Registration',   urgency:'high',     alarm:false, responsible:'All',     description:'Register on the Visit Japan Web portal (vjw-lp.digital.go.jp) to pre-register for immigration and customs. Completes the arrival card and customs declaration digitally — speeds up entry at HND considerably. All 5–6 members must register individually.' },
+    { date:'2026-12-01', day:'1',  month:'Dec',  label:'Final Confirmations',             urgency:'medium',   alarm:false, responsible:'All',     description:'Cross-check all bookings. Confirm everyone has flights, eSIM ordered, Splitwise set up, and offline maps downloaded. Final headcount on Day 7 activity options (Mt Fuji / Yokohama / Pokémon Park).' },
+    { date:'2026-12-10', day:'10', month:'Dec',  label:'⭐ Ghibli Museum Tickets Open',   urgency:'critical', alarm:true,  responsible:'Patrick', description:'10:00 AM JST via l-tike.com. Sells out in minutes. Have site loaded and account ready.', url:'https://l-tike.com' },
+    { date:'2026-12-10', day:'10', month:'Dec',  label:'⭐ Kirby Cafe Opens',             urgency:'critical', alarm:true,  responsible:'Patrick', description:'6:00 PM JST — completely separate site from Ghibli. Set a second alarm.' },
+    { date:'2027-01-09', day:'9',  month:'Jan',  label:'Departure Day',                   urgency:'high',     alarm:false, responsible:'All',     description:'Depart Charlotte (CLT). Arrive Tokyo Jan 9 local time. Top up Suica at HND immediately.' },
+    { date:'2027-01-14', day:'14', month:'Jan',  label:'Send Luggage to Kyoto',           urgency:'medium',   alarm:false, responsible:'All',     description:'Drop luggage with Yamato Transport the evening before transit day.' },
+    { date:'2027-01-15', day:'15', month:'Jan',  label:'Tokyo → Kyoto Transit',           urgency:'medium',   alarm:false, responsible:'All',     description:'Check out Tokyo Airbnb. Shinkansen to Kyoto ~2h 15min. Travel light — bags already forwarded.' },
+    { date:'2027-01-20', day:'20', month:'Jan',  label:'Kyoto → Osaka Transit',           urgency:'medium',   alarm:false, responsible:'All',     description:'Check out Kyoto Airbnb. Shinkansen or JR Kyoto Line to Osaka (~15–30 min).' },
+    { date:'2027-01-24', day:'24', month:'Jan',  label:'Departure from KIX or HND',       urgency:'high',     alarm:false, responsible:'All',     description:'Depart from KIX or HND — whichever return flight was booked. KIX: Haruka Express from Tennoji ~50 min. HND: Shinkansen to Tokyo then airport train ~30 min. Allow 3+ hours before departure either way. Tax refund counter: bring all receipts and original packaging.' }
   ],
   groupRules: [
     { icon:'🍺', rule:'Blackout pass',     detail:"Everyone gets ONE blackout pass for the entire trip. Use it wisely — after that, the group can and will intervene." },
@@ -4898,7 +4915,7 @@ const LOGISTICS = {
     reqTable.className = 'logi-table';
     [
       { key:'Type',       val:'Airbnb — 3 separate bookings (one per city)' },
-      { key:'Must have',  val:'Storage for 5 large suitcases. Central location in each city.' },
+      { key:'Must have',  val:'Storage for 5–6 large suitcases. Central location in each city.' },
       { key:'Book by',    val:`${L.accommodation.bookingWindow} — Patrick books all three` },
       { key:'Luggage',    val:'Yamato Transport forwards bags Tokyo → Kyoto the night before transit. Kyoto → Osaka: optional (short hop).' },
     ].forEach(r => {

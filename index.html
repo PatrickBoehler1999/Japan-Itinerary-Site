@@ -3319,20 +3319,39 @@ const ITINERARY_DATA = {
       ITIN_A('Dinner', 'Tokyo finale near the Airbnb', 'meal', [], `Venue TBD.`),
       ITIN_A('Night', 'Yamato forwarding to Kyoto', 'transit', [], `Konbini drop-off; confirm the Kyoto host can receive.`)
     ]},
-    { dayNumber:8, date:'January 16, 2027', city:'kyoto', title:'Bullet Train to Gold', theme:'Shinkansen, Golden Pavilion & Pontocho', lastTrain:'Pontocho/Kiyamachi → Kyoto Station: Karasuma Line from Shijo, last train ≈ 23:30. Taxi ≈ 10–15 min.', badges:[['transit','Tokyo → Kyoto']], estimatedCostPerPerson:{yen:20000,usd:133}, walking:{miles:5.0,steps:10500}, groupSplits:null, blocks:[
+    { dayNumber:8, date:'January 16, 2027', city:'kyoto', title:'Bullet Train to Gold', theme:'Shinkansen, Toei Studios or Golden Pavilion & Pontocho', lastTrain:'Pontocho/Kiyamachi → Kyoto Station: Karasuma Line from Shijo, last train ≈ 23:30. Taxi ≈ 10–15 min.', badges:[['transit','Tokyo → Kyoto'],['split','Split afternoon']], estimatedCostPerPerson:{yen:20500,usd:137}, walking:{miles:5.0,steps:10500}, groupSplits:true, blocks:[
       ITIN_A('~9:00 AM', 'Nozomi, Shinagawa → Kyoto', 'transit', [], `SmartEX · arrive ~11:15. Bags over 160 cm total need an oversized-baggage seat.`),
       ITIN_A('11:30 AM', 'Lunch at Kyoto Ramen Koji', 'meal', [], `Kyoto Station 10F.`),
-      ITIN_F('Kinkaku-ji / Ryoan-ji', '1:00–4:30 PM · two taxis', [
-        ITIN_S('Kinkaku-ji (Golden Pavilion)', ['jake'], 'Closes 5 PM'),
-        ITIN_I('Ryoan-ji', ['jake'], '~1 km walk')
+      ITIN_G('split', 'Group A', 'Toei Kyoto Studio Park', [], [
+        ITIN_A('12:30 PM', 'JR Sagano Line, Kyoto → Uzumasa', 'transit', [], `~12 min, then ~10 min walk to the park.`),
+        ITIN_A('1:00–4:00 PM', 'Toei Kyoto Studio Park', 'ticket', [], `~¥2,400 at the gate. Live shows run on a set schedule — grab the day's times at the entrance.`),
+        ITIN_F('Toei Studio Park', 'Inside the park', [
+          ITIN_S('Edo-period street sets', [], 'Working film sets used for samurai dramas'),
+          ITIN_I('Live samurai sword-fight show'),
+          ITIN_I('Ninja maze / mystery house'),
+          ITIN_I('Tokusatsu & Kamen Rider exhibits'),
+          ITIN_I('Samurai or ninja costume rental', [], 'Photos on the sets')
+        ]),
+        ITIN_A('~4:15 PM', 'Back toward downtown', 'transit', [], `Sagano Line to Kyoto, or Randen + subway to Shijo for dinner (~30 min).`)
       ]),
-      ITIN_A('Dinner', 'Chao Chao Gyoza, Kiyamachi', 'meal', ['conner'], `Walk-in; expect to split.`),
+      ITIN_G('split', 'Group B', 'Kinkaku-ji & Ryoan-ji', [], [
+        ITIN_A('12:45 PM', 'Two taxis to Kinkaku-ji', 'transit', [], `~20–25 min from Kyoto Station.`),
+        ITIN_F('Kinkaku-ji / Ryoan-ji', '1:15–4:30 PM', [
+          ITIN_S('Kinkaku-ji (Golden Pavilion)', [], '¥500 · closes 5 PM'),
+          ITIN_I('Ryoan-ji rock garden', [], '¥600 · ~1 km walk · closes 4:30 PM in winter'),
+          ITIN_I('Ninna-ji', [], 'Optional — 10 min walk past Ryoan-ji')
+        ]),
+        ITIN_A('~4:45 PM', 'Taxi or bus downtown', 'transit', [], `~25 min to Shijo / Kiyamachi for dinner.`)
+      ]),
+      ITIN_A('~6:00 PM', 'Everyone reconvenes — Chao Chao Gyoza, Kiyamachi', 'meal', [], `Walk-in; expect to split across tables.`),
       ITIN_F('Pontocho / Kiyamachi night', 'Karasuma Line home, Shijo → Kyoto (2 stops)', [
         ITIN_S('Pontocho Alley', ['jake']),
         ITIN_I('Bar Isn\u2019t It'),
         ITIN_I('Bungalow craft beer', ['steve','boros']),
         ITIN_I('Kichi Kichi Omurice', ['conner'], '1–2 person dinner · reservation')
       ])
+    ], notes:[
+      `<b>Split afternoon — pick a group on the day.</b> Bags are forwarded from Tokyo, so both groups head straight out after lunch. Toei Studio Park is open Jan 16–17 before its winter maintenance closure.`
     ]},
 
     { dayNumber:9, date:'January 17, 2027', city:'kyoto', title:'Gates, Games & Sake', theme:'Fushimi Inari, Nintendo Museum & Sake', badges:[['warn','Lottery ~Nov 1']], estimatedCostPerPerson:{yen:7800,usd:52}, walking:{miles:6.0,steps:12600}, groupSplits:null, blocks:[
@@ -3377,7 +3396,7 @@ const ITINERARY_DATA = {
         ITIN_I('Bungalow craft beer', ['steve','boros'], 'If not done Day 8')
       ])
     ], notes:[
-      `Toei Kyoto Studio Park was removed — it closes for maintenance in mid-January.`
+      `Toei Kyoto Studio Park is on Day 8 instead (Group A) — it's open Jan 16–17, then closes for maintenance.`
     ]},
 
     { dayNumber:11, date:'January 19, 2027', city:'kyoto', title:'Old Kyoto, Last Light', theme:'Higashiyama', lastTrain:'Gion → Kyoto Station: buses thin out by ~22:30 — plan on two taxis (~15 min).', badges:[], estimatedCostPerPerson:{yen:7500,usd:50}, walking:{miles:5.5,steps:11500}, groupSplits:null, blocks:[
@@ -3560,7 +3579,7 @@ const TRIP_DATA = {
     {id:'nishiki-market',person:['jake','conner'],city:'kyoto',category:'food',type:'Covered Market',name:'Nishiki Market',address:'Nishiki Market, Nakagyo, Kyoto',status:'confirmed',priority:'pending',estimatedCost:2500,estimatedDuration:'1–2 hours',bookingRequired:false,dayAssigned:10,groupActivity:true,description:`A 400-meter covered shopping street known as Kyoto's Kitchen — 100+ vendors selling pickled vegetables, fresh tofu, grilled skewers, matcha sweets, and specialty ingredients. Running since the Heian period.`,mapsQuery:'Nishiki Market Kyoto covered street',notes:`Stalls close ~5–6 PM — go hungry. Mostly cash.`,url:null},
     {id:'pontocho-alley',person:'jake',city:'kyoto',category:'bar',type:'Restaurant & Bar Alley',name:'Pontocho Alley',address:'Pontocho, Nakagyo, Kyoto',status:'confirmed',priority:'pending',estimatedCost:4000,estimatedDuration:'2–3 hours',bookingRequired:false,dayAssigned:8,groupActivity:true,description:`Narrow, lantern-lit alley alongside the Kamogawa River — one of Kyoto's most atmospheric dining streets. Traditional restaurants, sake bars, and cocktail spots in preserved townhouses.`,mapsQuery:'Pontocho Alley Kyoto Japan',notes:`Wander and pick — most spots need no booking. Best after 7 PM.`,url:null},
     {id:'kinkaku-ji',person:'jake',city:'kyoto',category:'temple',type:'Zen Temple',name:'Kinkaku-ji (Golden Pavilion)',address:'1 Kinkakujicho, Kita, Kyoto',status:'confirmed',priority:'pending',estimatedCost:500,estimatedDuration:'1 hour',bookingRequired:false,dayAssigned:8,groupActivity:true,description:`A three-story Zen Buddhist temple covered in gold leaf, reflected in Kyokochi Pond. Originally built as a shogun's retirement villa in 1397. One of Japan's most iconic images.`,mapsQuery:'Kinkaku-ji Golden Pavilion Kyoto',notes:`¥500. Closes 5 PM. ~1 km from Ryoan-ji.`,url:null},
-    {id:'ryoan-ji',person:'jake',city:'kyoto',category:'temple',type:'Zen Temple',name:'Ryoan-ji',address:'13 Ryoanji Goryonoshitacho, Ukyo, Kyoto',status:'confirmed',priority:'pending',estimatedCost:500,estimatedDuration:'45 mins',bookingRequired:false,dayAssigned:8,groupActivity:true,description:`Home to Japan's most famous rock garden — 15 carefully raked stones whose exact arrangement has never been officially explained. A UNESCO World Heritage Site.`,mapsQuery:'Ryoan-ji rock garden Kyoto',notes:`¥500. ~1 km walk from Kinkaku-ji.`,url:null},
+    {id:'ryoan-ji',person:'jake',city:'kyoto',category:'temple',type:'Zen Temple',name:'Ryoan-ji',address:'13 Ryoanji Goryonoshitacho, Ukyo, Kyoto',status:'confirmed',priority:'pending',estimatedCost:600,estimatedDuration:'45 mins',bookingRequired:false,dayAssigned:8,groupActivity:true,description:`Home to Japan's most famous rock garden — 15 carefully raked stones whose exact arrangement has never been officially explained. A UNESCO World Heritage Site.`,mapsQuery:'Ryoan-ji rock garden Kyoto',notes:`¥600. Closes 4:30 PM in winter. ~1 km walk from Kinkaku-ji.`,url:null},
     {id:'shinsen-en-water-garden',person:'jake',city:'kyoto',category:'temple',type:'Historic Garden',name:'Shinsen-en Water Garden',address:'Monzen-cho, Nakagyo, Kyoto',status:'researching',priority:'pending',estimatedCost:0,estimatedDuration:'30 mins',bookingRequired:false,dayAssigned:10,groupActivity:true,description:`A free, almost entirely overlooked garden hidden behind Nijo Castle — the last remnant of an imperial garden from the 9th century. A small vermilion bridge crosses a sacred carp pond. Completely peaceful.`,mapsQuery:'Shinsen-en garden Kyoto Japan',notes:`Free, and usually quiet. Right by Nijo Castle.`,url:null},
     {id:'nijo-castle',person:'jake',city:'kyoto',category:'temple',type:'Castle',name:'Nijo Castle',address:'541 Nijojocho, Nakagyo, Kyoto',status:'confirmed',priority:'pending',estimatedCost:800,estimatedDuration:'1–2 hours',bookingRequired:false,dayAssigned:10,groupActivity:true,description:`The Kyoto residence of the Tokugawa shoguns. Famous for nightingale floors — corridors engineered to squeak when walked on to alert against assassins. Spectacular Ninomaru Palace interiors.`,mapsQuery:'Nijo Castle Kyoto Japan',notes:`¥800, last entry ~4 PM. The palace interiors are the best in Kyoto.`,url:null},
     {id:'fushimi-inari',person:'jake',city:'kyoto',category:'temple',type:'Shinto Shrine',name:'Fushimi Inari',address:'68 Fukakusa Yabunouchicho, Fushimi, Kyoto',status:'confirmed',priority:'pending',estimatedCost:0,estimatedDuration:'2–3 hours',bookingRequired:false,dayAssigned:9,groupActivity:true,description:`Thousands of vermilion torii gates winding up the sacred Mount Inari. The lower section is crowded; the upper trails become quiet forest. Full summit hike is 4km round-trip. Free entry.`,mapsQuery:'Fushimi Inari Shrine Kyoto torii gates',notes:`Before 7 AM for empty gates. Turn back at Yotsutsuji to save time.`,url:null},
@@ -3761,7 +3780,7 @@ const TRIP_DATA = {
 
     {id:'toei-animation-gallery',person:'silva',city:'tokyo',category:'museum',type:'Animation Studio Museum',name:'Toei Animation Gallery',address:'2-10-5 Higashi-Oizumi, Nerima, Tokyo',status:'researching',priority:'pending',estimatedCost:0,estimatedDuration:'1 hour',bookingRequired:false,dayAssigned:3,groupActivity:false,description:`A small, free museum at Toei Animation's actual production studio in Nerima — the company behind One Piece, Dragon Ball, Sailor Moon, and Digimon. Original cels, character model sheets, and production materials on display, plus a gift shop with merchandise not sold elsewhere. Modest in size but a genuine look at the studio actually making the shows Silva grew up on, rather than a tourist-facing attraction.`,mapsQuery:'Toei Animation Gallery Oizumi Tokyo',notes:`Free. In Nerima — +20 min on the Seibu Ikebukuro Line from Ikebukuro.`,url:null},
 
-    {id:'toei-studios-kyoto',person:['patrick','silva','jake'],city:'kyoto',category:'themepark',type:'Film Studio Theme Park',name:'Toei Studios Kyoto',address:'10 Uzumasa Higashihachiokacho, Ukyo, Kyoto',status:'researching',priority:'pending',estimatedCost:2400,estimatedDuration:'2–3 hours',bookingRequired:false,dayAssigned:null,groupActivity:true,description:`A real working film studio turned theme park, built around the sets used for samurai and period dramas (jidaigeki) since the 1970s. Recreated Edo-period streets, a ninja experience zone, live samurai sword-fighting shows, and a museum covering Japanese film and tokusatsu (live-action superhero/monster) history — including Kamen Rider and other tokusatsu props Silva will recognize. Staff in costume wander the sets and you can rent samurai or ninja outfits for photos.`,mapsQuery:'Toei Studios Kyoto Uzumasa',notes:`⚠️ Closed for maintenance in mid-January — removed from the itinerary.`,url:null},
+    {id:'toei-studios-kyoto',person:['patrick','silva','jake'],city:'kyoto',category:'themepark',type:'Film Studio Theme Park',name:'Toei Studios Kyoto',address:'10 Uzumasa Higashihachiokacho, Ukyo, Kyoto',status:'researching',priority:'pending',estimatedCost:2400,estimatedDuration:'2–3 hours',bookingRequired:false,dayAssigned:8,groupActivity:true,description:`A real working film studio turned theme park, built around the sets used for samurai and period dramas (jidaigeki) since the 1970s. Recreated Edo-period streets, a ninja experience zone, live samurai sword-fighting shows, and a museum covering Japanese film and tokusatsu (live-action superhero/monster) history — including Kamen Rider and other tokusatsu props Silva will recognize. Staff in costume wander the sets and you can rent samurai or ninja outfits for photos.`,mapsQuery:'Toei Studios Kyoto Uzumasa',notes:`Day 8 split afternoon (Group A), 1:00–4:00 PM. Open Jan 16–17, then closes for winter maintenance. Live shows run on a set schedule.`,url:null},
 
     {id:'round1-osaka',person:'patrick',city:'osaka',category:'entertainment',type:'Entertainment Complex',name:'Round 1 Osaka',address:'Namba Parks, 2-10-70 Nanbanaka, Naniwa, Osaka',status:'researching',priority:'pending',estimatedCost:3000,estimatedDuration:'3–5 hours',bookingRequired:false,dayAssigned:13,groupActivity:true,description:`Japan's premier bowling and arcade entertainment chain, and the Osaka Namba location is one of the best in the country. Multiple floors of bowling, billiards, karaoke, table tennis, batting cages, darts, and a massive arcade floor. The big draw: Round 1 is open 24 hours on weekends and until the early hours on weekdays — it becomes a late-night institution after the bars, with a completely different crowd at 2am than at 2pm. Great group activity that works for every interest level.`,mapsQuery:'Round 1 Osaka Namba Parks',notes:`Open until 5 AM on weekends — up to 6 per bowling lane.`,url:'https://www.round1.co.jp'},
 
@@ -3820,7 +3839,7 @@ if (typeof window !== 'undefined') window.TRIP_DATA = TRIP_DATA;
         { key:'Early starts',   val:'Fushimi Inari (~6:30 AM, Day 9) and Arashiyama Bamboo Forest (~7:00 AM, Day 10) are best before tour groups arrive.' },
         { key:'Accom.',         val:'✅ BOOKED — "REI — Private Condo at Kyoto Station" (Minami Ward). 35-4 Higashikujō Shimotonodachō, Minami-ku, Kyoto, Kyoto 601-8047. 3-story traditional machiya, 4BR/7 beds/2 baths, sleeps up to 9. ★4.83 "Guest Favorite" (185 reviews), host Shota — Superhost, 10 years hosting, professionally managed (Kyoto-An Group). ~10 min walk from Kyoto Station. Note: Kyoto City Accommodation Tax (¥200/adult/night, ~¥4,800 total) not included in the rate; ¥4,400/suitcase fee if anything is left behind at checkout.' },
         { key:'Lottery',        val:'⏳ Nintendo Museum (Day 9, 10 AM) — results ~Nov 1, payment due within ~7 days. Fallback plan is on Day 9.' },
-        { key:'Closures',       val:'Toei Kyoto Studio Park closes for maintenance mid-January (removed). Kyoto National Museum closed Mondays.' },
+        { key:'Closures',       val:'Toei Kyoto Studio Park is open Jan 16–17, then closes for maintenance — scheduled for Day 8. Kyoto National Museum closed Mondays.' },
       ],
     },
     osaka: {
